@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Kaiven Software Store | Official Gamepasses & Digitalware</title>
+  <meta name="description" content="Official Kaiven Software Store. Purchase official Omni Seas Roblox gamepasses, digitalware, and exclusive perks.">
+  
+  <!-- Favicon -->
+  <link rel="icon" href="assets/images/logo.png" type="image/png">
+
+  <!-- Google Fonts: Inter & Orbitron -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Orbitron:wght@700;800;900&display=swap" rel="stylesheet">
+
+  <!-- FontAwesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+  <link rel="stylesheet" href="style.css">
+</head>
+<body class="kaiven-site">
+
+  <!-- Background Interactive Mesh & Canvas -->
+  <canvas id="oceanCanvas"></canvas>
+  <div class="rs-grid-overlay"></div>
+
+  <!-- Top Navigation Bar -->
+  <header class="rs-navbar" id="navbar">
+    <div class="rs-nav-container">
+
+      <!-- Left: Logo & Core Nav -->
+      <div class="rs-nav-left">
+        <a href="index.html" class="rs-logo-link" title="Kaiven Software Home">
+          <div class="rs-logo-box glow-hover">
+            <img src="assets/images/logo.png" alt="Logo" class="rs-logo-img">
+          </div>
+        </a>
+
+        <nav class="rs-main-menu" id="mainMenu">
+          <a href="index.html" class="rs-menu-item"><i class="fa-solid fa-arrow-left"></i> HOME</a>
+          <a href="omni-seas.html" class="rs-menu-item">GAMES</a>
+          <a href="https://www.roblox.com/communities/674886308/Kaiven-Software" target="_blank" class="rs-menu-item">COMMUNITY</a>
+          <a href="store.html" class="rs-menu-item active">STORE</a>
+          <a href="#support" class="rs-menu-item">SUPPORT</a>
+        </nav>
+      </div>
+
+      <!-- Right: Utility Actions & Account -->
+      <div class="rs-nav-right">
+        <a href="https://www.roblox.com/games/127945167767729/Omni-Seas" target="_blank" class="rs-btn-launcher btn-shimmer">
+          PLAY
+        </a>
+        <button class="rs-icon-btn" id="openSearchBtn" title="Search">
+          <i class="fa-solid fa-magnifying-glass"></i>
+        </button>
+        <a href="https://discord.gg/ccWf2pxShW" target="_blank" class="rs-user-btn" title="Discord Community">
+          <i class="fa-brands fa-discord"></i>
+        </a>
+        <button class="rs-hamburger-btn" id="mobileToggle" aria-label="Toggle Navigation">
+          <i class="fa-solid fa-bars"></i>
+        </button>
+      </div>
+
+    </div>
+  </header>
+
+  <!-- Store Hero Banner -->
+  <section class="rs-hero" style="min-height: 45vh; padding-top: 140px;">
+    <div class="rs-hero-backdrop"></div>
+    <div class="rs-hero-gradient"></div>
+
+    <div class="rs-hero-container container text-center">
+      <div class="rs-hero-card" style="margin: 0 auto; max-width: 800px;">
+        <div class="rs-hero-tag animate-slide-up"><i class="fa-solid fa-bag-shopping text-cyan"></i> OFFICIAL STORE</div>
+        <h1 class="rs-hero-title animate-slide-up delay-1">KAIVEN STORE</h1>
+        <p class="rs-hero-desc animate-slide-up delay-2">Official Omni Seas digitalware, Roblox gamepasses, and in-game perks.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Store Showcase Section -->
+  <section class="rs-newswire-section reveal-on-scroll">
+    <div class="container">
+
+      <div class="rs-section-header">
+        <h2 class="rs-section-title">GAMEPASSES & DIGITALWARE</h2>
+      </div>
+
+      <div style="max-width: 700px; margin: 0 auto;">
+
+        <!-- Digitalware & Gamepasses Card -->
+        <article class="rs-card tilt-card">
+          <div class="rs-card-link">
+            <div class="rs-card-thumb" style="height: 250px;">
+              <img src="assets/images/omniseas-logo.png" alt="Digitalware & Gamepasses" class="rs-card-img" style="max-width: 140px; max-height: 140px;">
+              <span class="rs-card-category">ROBLOX STORE</span>
+            </div>
+            <div class="rs-card-body text-center" style="padding: 32px;">
+              <h3 class="rs-card-title" style="font-size: 1.5rem;">Omni Seas Gamepasses & Digitalware</h3>
+              <p class="rs-card-excerpt" style="margin-bottom: 24px; font-size: 1.02rem;">Exclusive ship skins, title badges, and card pack bundles on Roblox.</p>
+              <span class="rs-platform-tag" style="background: rgba(0, 242, 254, 0.15); border-color: var(--rs-cyan); color: var(--rs-cyan); padding: 8px 16px; font-size: 0.8rem;">COMING SOON TO ROBLOX</span>
+            </div>
+          </div>
+        </article>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- Discord & Community Banner -->
+  <section class="rs-promo-banner reveal-on-scroll">
+    <div class="container">
+      <div class="rs-promo-card glow-card text-center">
+        <h2 class="rs-promo-title">WANT EARLY STORE ALERTS?</h2>
+        <p class="rs-promo-text" style="margin: 0 auto 24px;">Join our Discord server to get notified when gamepasses and digitalware go live.</p>
+
+        <div style="display: flex; gap: 16px; justify-content: center; flex-wrap: wrap;">
+          <a href="https://discord.gg/ccWf2pxShW" target="_blank" class="rs-btn-primary btn-shimmer">
+            JOIN DISCORD <i class="fa-brands fa-discord"></i>
+          </a>
+          <a href="https://www.roblox.com/communities/674886308/Kaiven-Software" target="_blank" class="rs-btn-secondary">
+            ROBLOX GROUP
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="rs-footer">
+    <div class="container">
+      <div class="rs-footer-top">
+        <div class="rs-lang-selector">
+          <i class="fa-solid fa-globe"></i> <span>ENGLISH (US)</span>
+        </div>
+        <div class="rs-footer-socials">
+          <a href="https://discord.gg/ccWf2pxShW" target="_blank" title="Discord"><i class="fa-brands fa-discord"></i></a>
+          <a href="https://www.roblox.com/communities/674886308/Kaiven-Software" target="_blank" title="Roblox"><i class="fa-solid fa-cube"></i></a>
+          <a href="https://github.com/kaivensoftware" target="_blank" title="GitHub"><i class="fa-brands fa-github"></i></a>
+        </div>
+      </div>
+
+      <div class="rs-footer-links">
+        <a href="index.html">Home</a>
+        <a href="omni-seas.html">Omni Seas</a>
+        <a href="store.html">Store</a>
+        <a href="https://discord.gg/ccWf2pxShW" target="_blank">Discord Community</a>
+        <a href="https://www.roblox.com/games/127945167767729/Omni-Seas" target="_blank">Roblox Game</a>
+      </div>
+
+      <div class="rs-footer-bottom">
+        <div class="rs-footer-brand">
+          <img src="assets/images/logo.png" alt="Logo" class="rs-footer-emblem">
+          <span>KAIVEN SOFTWARE</span>
+        </div>
+        <p class="rs-copyright">Kaiven Software, Inc. © 2026. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Search Modal -->
+  <div class="rs-search-overlay" id="searchModal">
+    <div class="rs-search-container">
+      <button class="rs-search-close" id="closeSearchBtn"><i class="fa-solid fa-xmark"></i></button>
+      <div class="rs-search-box">
+        <i class="fa-solid fa-magnifying-glass rs-search-icon"></i>
+        <input type="text" id="searchInput" placeholder="SEARCH KAIVEN SOFTWARE & GAMES..." autofocus>
+      </div>
+      <div class="rs-search-results" id="searchResults">
+        <div class="rs-search-quick">
+          <span>QUICK LINKS:</span>
+          <a href="https://discord.gg/ccWf2pxShW" target="_blank">Join Discord</a>
+          <a href="store.html">Store Page</a>
+          <a href="https://www.roblox.com/games/127945167767729/Omni-Seas" target="_blank">Play Omni Seas</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>

@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>OMNI SEAS | Official Game Page - Kaiven Software</title>
+  <meta name="description" content="Omni Seas is an open-world oceanic fantasy action RPG on Roblox created by Kaiven Software. Play on Roblox or join our Discord community.">
+  
+  <!-- Favicon -->
+  <link rel="icon" href="assets/images/omniseas-logo.png" type="image/png">
+
+  <!-- Google Fonts: Inter -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+  <!-- FontAwesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+  <link rel="stylesheet" href="style.css">
+</head>
+<body class="kaiven-site">
+
+  <!-- Background Canvas -->
+  <canvas id="oceanCanvas"></canvas>
+  <div class="rs-grid-overlay"></div>
+
+  <!-- Header -->
+  <header class="rs-navbar" id="navbar">
+    <div class="rs-nav-container">
+
+      <!-- Left: Logo & Core Nav -->
+      <div class="rs-nav-left">
+        <a href="index.html" class="rs-logo-link" title="Kaiven Software Home">
+          <div class="rs-logo-box glow-hover">
+            <img src="assets/images/logo.png" alt="Logo" class="rs-logo-img">
+          </div>
+        </a>
+
+        <nav class="rs-main-menu" id="mainMenu">
+          <a href="index.html" class="rs-menu-item"><i class="fa-solid fa-arrow-left"></i> HOME</a>
+          <a href="omni-seas.html" class="rs-menu-item active">OMNI SEAS</a>
+          <a href="https://www.roblox.com/communities/674886308/Kaiven-Software" target="_blank" class="rs-menu-item">COMMUNITY</a>
+          <a href="store.html" class="rs-menu-item">STORE</a>
+          <a href="#support" class="rs-menu-item">SUPPORT</a>
+        </nav>
+      </div>
+
+      <!-- Right: Utility Actions & Account -->
+      <div class="rs-nav-right">
+        <a href="https://www.roblox.com/games/127945167767729/Omni-Seas" target="_blank" class="rs-btn-launcher btn-shimmer">
+          PLAY
+        </a>
+        <button class="rs-icon-btn" id="openSearchBtn" title="Search">
+          <i class="fa-solid fa-magnifying-glass"></i>
+        </button>
+        <a href="https://discord.gg/ccWf2pxShW" target="_blank" class="rs-user-btn" title="Discord Community">
+          <i class="fa-brands fa-discord"></i>
+        </a>
+        <button class="rs-hamburger-btn" id="mobileToggle" aria-label="Toggle Navigation">
+          <i class="fa-solid fa-bars"></i>
+        </button>
+      </div>
+
+    </div>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="rs-hero" id="overview" style="min-height: calc(100vh - 180px); display: flex; align-items: center;">
+    <div class="rs-hero-backdrop"></div>
+    <div class="rs-hero-gradient"></div>
+
+    <div class="rs-hero-container container">
+      <div class="rs-hero-card" style="max-width: 750px; margin: 0 auto; text-align: center;">
+        <div class="hero-logo-wrapper" style="margin-bottom: 20px;">
+          <img src="assets/images/omniseas-logo.png" alt="Omni Seas Logo" style="width: 160px; height: 160px; object-fit: contain; filter: drop-shadow(0 0 35px var(--rs-cyan));">
+        </div>
+
+        <div class="rs-hero-tag"><i class="fa-solid fa-compass text-cyan"></i> ROBLOX GAME</div>
+        <h1 class="rs-hero-title" style="font-size: clamp(3.5rem, 8vw, 6rem);">OMNI SEAS</h1>
+        <p class="rs-platform-tag" style="display: inline-block; margin-bottom: 20px; color: var(--rs-cyan); border-color: var(--rs-cyan);">ROBLOX EXCLUSIVE • PC LAUNCH FIRST</p>
+
+        <p class="rs-hero-desc" style="font-size: 1.2rem; line-height: 1.7; margin-bottom: 36px;">
+          An open-world, island-to-island action RPG on Roblox. Sail uncharted ocean realms, master Soulslike precision combat, and unearth ancient star relics.
+        </p>
+
+        <div class="rs-hero-buttons" style="justify-content: center;">
+          <a href="https://www.roblox.com/games/127945167767729/Omni-Seas" target="_blank" class="rs-btn-primary btn-shimmer">
+            PLAY ON ROBLOX <i class="fa-solid fa-play"></i>
+          </a>
+          <a href="https://discord.gg/ccWf2pxShW" target="_blank" class="rs-btn-secondary">
+            JOIN DISCORD <i class="fa-brands fa-discord"></i>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="rs-footer">
+    <div class="container">
+      <div class="rs-footer-top">
+        <div class="rs-lang-selector">
+          <i class="fa-solid fa-globe"></i> <span>ENGLISH (US)</span>
+        </div>
+        <div class="rs-footer-socials">
+          <a href="https://discord.gg/ccWf2pxShW" target="_blank" title="Discord"><i class="fa-brands fa-discord"></i></a>
+          <a href="https://www.roblox.com/communities/674886308/Kaiven-Software" target="_blank" title="Roblox"><i class="fa-solid fa-cube"></i></a>
+          <a href="https://github.com/kaivensoftware" target="_blank" title="GitHub"><i class="fa-brands fa-github"></i></a>
+        </div>
+      </div>
+
+      <div class="rs-footer-links">
+        <a href="index.html">HOME</a>
+        <a href="omni-seas.html">OMNI SEAS</a>
+        <a href="store.html">STORE</a>
+        <a href="https://discord.gg/ccWf2pxShW" target="_blank">DISCORD COMMUNITY</a>
+        <a href="https://www.roblox.com/games/127945167767729/Omni-Seas" target="_blank">ROBLOX GAME</a>
+      </div>
+
+      <div class="rs-footer-bottom">
+        <div class="rs-footer-brand">
+          <img src="assets/images/logo.png" alt="Logo" class="rs-footer-emblem">
+          <span>KAIVEN SOFTWARE</span>
+        </div>
+        <p class="rs-copyright">Kaiven Software, Inc. © 2026. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Search Modal -->
+  <div class="rs-search-overlay" id="searchModal">
+    <div class="rs-search-container">
+      <button class="rs-search-close" id="closeSearchBtn"><i class="fa-solid fa-xmark"></i></button>
+      <div class="rs-search-box">
+        <i class="fa-solid fa-magnifying-glass rs-search-icon"></i>
+        <input type="text" id="searchInput" placeholder="SEARCH KAIVEN SOFTWARE & GAMES..." autofocus>
+      </div>
+      <div class="rs-search-results" id="searchResults">
+        <div class="rs-search-quick">
+          <span>QUICK LINKS:</span>
+          <a href="https://discord.gg/ccWf2pxShW" target="_blank">Join Discord</a>
+          <a href="store.html">Store Page</a>
+          <a href="https://www.roblox.com/games/127945167767729/Omni-Seas" target="_blank">Play Omni Seas</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
