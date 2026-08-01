@@ -1,6 +1,6 @@
 /* ==========================================================================
    OMNI SEAS CHARACTER BUILDER & BUILD CALCULATOR ENGINE
-   Official 165 Cards (Cards.txt + morecards.txt)
+   Official 185 Cards (Cards.txt + morecards.txt + originspecificcards.txt)
    Max 100 per stat, 250 Total Build Point Cap, 100 Weapon Mastery Cap
    ========================================================================== */
 
@@ -65,6 +65,7 @@ document.addEventListener('DOMContentLoaded', () => {
       currentFaction = opt.getAttribute('data-faction');
       factionBadge.textContent = currentFaction.toUpperCase();
       startingOmni.textContent = factionOmniMap[currentFaction];
+      updateUI();
     });
   });
 
@@ -82,7 +83,7 @@ document.addEventListener('DOMContentLoaded', () => {
   let equippedCards = [];
   let selectedCategory = 'ALL';
 
-  // 165 Official Cards (150 Cards.txt + 15 High Multi-Stat morecards.txt)
+  // 185 Official Cards (150 Cards.txt + 15 morecards.txt + 20 originspecificcards.txt)
   const cardPool = [
     // Strength
     {name:"Heavy Hauler",req:"0 STR",category:"Strength",effect:"+3% Carrying Capacity, +2% Grip Damage"},
@@ -241,7 +242,7 @@ document.addEventListener('DOMContentLoaded', () => {
     {name:"Unbending Titan",req:"60 Heavy Mastery",category:"Heavy Mastery",effect:"Gain poise armor during heavy charged swings"},
     {name:"Devastating Impact",req:"60 Heavy Mastery",category:"Heavy Mastery",effect:"Guard breaking an enemy reduces their defense by 12% for 3s"},
     {name:"World Breaker",req:"80 Heavy Mastery",category:"Heavy Mastery",effect:"+18% Heavy Weapon Damage"},
-    {name:"Cataclysm Slam",req:"80 Heavy Mastery",category:"Heavy Mastery",effect:"Heavy attacks deal +25% Guard Break Power"},
+    {name:"Cataclysm Slam",req:"80 Heavy Mastery",category:"Heavy Mastery",effect:"+25% Guard Break Power"},
     {name:"Immovable Force",req:"80 Heavy Mastery",category:"Heavy Mastery",effect:"Heavy attack windups gain hyper armor (uninterruptible)"},
     {name:"Dreadful Sweep",req:"80 Heavy Mastery",category:"Heavy Mastery",effect:"Heavy attack hits break weak blocks instantly"},
     {name:"Apex Heavy Master",req:"80 Heavy Mastery",category:"Heavy Mastery",effect:"+20% Heavy Weapon Posture Damage"},
@@ -300,16 +301,58 @@ document.addEventListener('DOMContentLoaded', () => {
     {name:"Vanguard Breaker",req:"70 STR, 40 VIT, 60 Heavy Mastery",category:"High Multi-Stat",effect:"Heavy attack windups gain hyper armor; +15% Posture Damage"},
     {name:"Gale Marksman",req:"70 AGI, 50 VIT, 50 Gun Mastery",category:"High Multi-Stat",effect:"Dodging reloads 1 bullet instantly; +10% Dodge Distance, +8% Max HP"},
     {name:"Titan Fortress",req:"75 STR, 75 VIT, 50 Heavy Mastery",category:"High Multi-Stat",effect:"+15% Physical Damage, +15% Max HP, +15% Posture Damage"},
-    {name:"Blitz Sovereign",req:"75 AGI, 50 STR, 50 Light Mastery",category:"High Multi-Stat",effect:"+15% Movement Speed, +12% Light Weapon Damage, +10% Guard Break Power"}
+    {name:"Blitz Sovereign",req:"75 AGI, 50 STR, 50 Light Mastery",category:"High Multi-Stat",effect:"+15% Movement Speed, +12% Light Weapon Damage, +10% Guard Break Power"},
+
+    // Origin Exclusives (originspecificcards.txt)
+    {name:"Absolute Order",req:"40 STR, 20 Gun Mastery, Marine Faction",category:"Marine",effect:"+8% Heavy Attack Damage, +5% Gun Damage against Pirate targets"},
+    {name:"Iron Justice",req:"50 VIT, 30 Medium Mastery, Marine Faction",category:"Marine",effect:"+10% Damage Reduction while blocking, +5% Max HP"},
+    {name:"Tactical Fleet Stance",req:"40 AGI, 20 Gun Mastery, Marine Faction",category:"Marine",effect:"+8% Reload Speed, +5% Movement Speed near faction allies"},
+    {name:"Buster Command",req:"60 STR, 40 Heavy Mastery, Marine Faction",category:"Marine",effect:"+12% Guard Break Power against player ships and unlawful targets"},
+    {name:"Righteous Pursuit",req:"50 AGI, 30 Light Mastery, Marine Faction",category:"Marine",effect:"+10% Sprint Speed towards bounties and hostile targets"},
+    {name:"Plunderer's Greed",req:"30 AGI, 20 Light Mastery, Pirate Faction",category:"Pirate",effect:"+10% Omni currency gain from combat, +5% Light Attack Speed"},
+    {name:"Reckless Broadside",req:"50 STR, 30 Gun Mastery, Pirate Faction",category:"Pirate",effect:"+10% Gun Posture Damage, +5% Physical Damage"},
+    {name:"Marauder's Grit",req:"60 VIT, 20 Heavy Mastery, Pirate Faction",category:"Pirate",effect:"+12% Max HP, +8% Damage when below 30% HP"},
+    {name:"Corsair Step",req:"50 AGI, 30 Medium Mastery, Pirate Faction",category:"Pirate",effect:"+8% Dodge Distance, +5% Parry Timing Window while on ship decks"},
+    {name:"Flag of Chaos",req:"70 STR, 30 Heavy Mastery, Pirate Faction",category:"Pirate",effect:"Heavy attack hits deal +15% Guard Break against Marine and Guard NPCs"},
+    {name:"Subversive Intel",req:"40 AGI, 20 Medium Mastery, Revolutionary Army Faction",category:"Revolutionary Army",effect:"+8% Movement Speed, reveals target stat focus on landed hits"},
+    {name:"Liberation Strike",req:"50 STR, 30 Light Mastery, Revolutionary Army Faction",category:"Revolutionary Army",effect:"+10% Armor Penetration against Marine and government targets"},
+    {name:"Underground Resilience",req:"60 VIT, 20 Light Mastery, Revolutionary Army Faction",category:"Revolutionary Army",effect:"+15% Health Regeneration Rate while out of combat, +5% Max HP"},
+    {name:"Guerilla Ambush",req:"50 AGI, 30 Gun Mastery, Revolutionary Army Faction",category:"Revolutionary Army",effect:"Attacks to an opponent's back deal +15% Critical Damage"},
+    {name:"Spark of Rebellion",req:"60 STR, 40 VIT, Revolutionary Army Faction",category:"Revolutionary Army",effect:"+10% Physical Damage, +8% Stun Resistance"},
+    {name:"Uncharted Horizon",req:"30 AGI, 20 Medium Mastery, Adventurer Faction",category:"Adventurer",effect:"+8% Movement Speed on unvisited islands, +5% Stamina Regen"},
+    {name:"Wayfarer's Instinct",req:"50 AGI, 30 Light Mastery, Adventurer Faction",category:"Adventurer",effect:"+10% Dodge Distance, -50% Fall Damage taken"},
+    {name:"Pioneer Endurance",req:"60 VIT, 20 Heavy Mastery, Adventurer Faction",category:"Adventurer",effect:"+10% Max HP, +10% Environmental Hazard Resistance"},
+    {name:"Survivalist Scavenger",req:"40 VIT, 20 Gun Mastery, Adventurer Faction",category:"Adventurer",effect:"+10% Health Recovery from all consumables, +5% Reload Speed"},
+    {name:"Master Explorer",req:"50 STR, 50 AGI, Adventurer Faction",category:"Adventurer",effect:"+8% Physical Damage, +8% Movement Speed, +5% Exploration EXP Gain"}
   ];
 
-  // Parse Requirement String (e.g. "10 STR, 10 Heavy Mastery")
+  // Parse Requirement String (e.g. "40 STR, 20 Gun Mastery, Marine Faction")
   function meetsRequirement(reqStr) {
     if (!reqStr || reqStr === '0') return true;
 
     const parts = reqStr.split(',');
     for (let part of parts) {
       part = part.trim();
+
+      // Faction check
+      if (part.includes('Marine Faction')) {
+        if (currentFaction !== 'Marines') return false;
+        continue;
+      }
+      if (part.includes('Pirate Faction')) {
+        if (currentFaction !== 'Pirates') return false;
+        continue;
+      }
+      if (part.includes('Revolutionary Army Faction')) {
+        if (currentFaction !== 'Revolutionaries') return false;
+        continue;
+      }
+      if (part.includes('Adventurer Faction')) {
+        if (currentFaction !== 'Adventurers') return false;
+        continue;
+      }
+
+      // Stat requirement check
       const match = part.match(/^(\d+)\s+(.+)$/);
       if (!match) continue;
 
@@ -505,7 +548,13 @@ document.addEventListener('DOMContentLoaded', () => {
     if (!cardLibraryGrid) return;
     cardLibraryGrid.innerHTML = '';
 
-    const filtered = cardPool.filter(c => selectedCategory === 'ALL' || c.category === selectedCategory);
+    const filtered = cardPool.filter(c => {
+      if (selectedCategory === 'ALL') return true;
+      if (selectedCategory === 'FACTION_EXCLUSIVES') {
+        return ['Marine', 'Pirate', 'Revolutionary Army', 'Adventurer'].includes(c.category);
+      }
+      return c.category === selectedCategory;
+    });
 
     filtered.forEach(card => {
       const isEquipped = equippedCards.some(c => c.name === card.name);
