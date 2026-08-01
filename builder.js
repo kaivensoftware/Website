@@ -483,22 +483,7 @@ document.addEventListener('DOMContentLoaded', () => {
   heavySlider?.addEventListener('input', () => handleMasteryChange(heavySlider, 'heavy'));
   gunSlider?.addEventListener('input', () => handleMasteryChange(gunSlider, 'gun'));
 
-  // Preset Buttons
-  document.getElementById('presetHeavyBtn')?.addEventListener('click', () => {
-    stats = { str: 100, vit: 50, agi: 0, light: 0, med: 0, heavy: 100, gun: 0 };
-    syncSliders();
-  });
-
-  document.getElementById('presetGunslingerBtn')?.addEventListener('click', () => {
-    stats = { str: 20, vit: 50, agi: 80, light: 0, med: 0, heavy: 0, gun: 100 };
-    syncSliders();
-  });
-
-  document.getElementById('presetBalancedBtn')?.addEventListener('click', () => {
-    stats = { str: 50, vit: 50, agi: 50, light: 25, med: 25, heavy: 25, gun: 25 };
-    syncSliders();
-  });
-
+  // Reset Build Button
   document.getElementById('resetBuildBtn')?.addEventListener('click', () => {
     stats = { str: 0, vit: 0, agi: 0, light: 0, med: 0, heavy: 0, gun: 0 };
     equippedCards = [];
