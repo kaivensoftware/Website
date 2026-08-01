@@ -1,6 +1,6 @@
 /* ==========================================================================
    OMNI SEAS CHARACTER BUILDER & BUILD CALCULATOR ENGINE
-   Official 150 Cards from Cards.txt
+   Official 165 Cards (Cards.txt + morecards.txt)
    Max 100 per stat, 250 Total Build Point Cap, 100 Weapon Mastery Cap
    ========================================================================== */
 
@@ -82,7 +82,7 @@ document.addEventListener('DOMContentLoaded', () => {
   let equippedCards = [];
   let selectedCategory = 'ALL';
 
-  // 150 Official Cards from Cards.txt
+  // 165 Official Cards (150 Cards.txt + 15 High Multi-Stat morecards.txt)
   const cardPool = [
     // Strength
     {name:"Heavy Hauler",req:"0 STR",category:"Strength",effect:"+3% Carrying Capacity, +2% Grip Damage"},
@@ -283,7 +283,24 @@ document.addEventListener('DOMContentLoaded', () => {
     {name:"Phantom Gunner",req:"20 AGI, 20 Gun Mastery",category:"Mixed",effect:"+6% Move Speed while aiming, +6% Reload Speed"},
     {name:"Titan Bastion",req:"40 STR, 40 VIT",category:"Mixed",effect:"+8% Max HP, +8% Physical Damage, +5% Stun Reduction"},
     {name:"Tempest Blade Master",req:"40 AGI, 40 Light Mastery",category:"Mixed",effect:"+8% Light Attack Speed, -10% Dodge Stamina Drain"},
-    {name:"War Lord Matrix",req:"60 STR, 60 VIT, 60 AGI",category:"Mixed",effect:"+10% Max HP, +10% Physical Damage, +10% Move Speed"}
+    {name:"War Lord Matrix",req:"60 STR, 60 VIT, 60 AGI",category:"Mixed",effect:"+10% Max HP, +10% Physical Damage, +10% Move Speed"},
+
+    // High Multi-Stat (morecards.txt)
+    {name:"Monolithic Bastion",req:"70 STR, 70 VIT, 30 Heavy Mastery",category:"High Multi-Stat",effect:"+15% Max HP, +12% Guard Break Power, +10% Stun Resistance"},
+    {name:"Juggernaut Overdrive",req:"80 STR, 80 VIT",category:"High Multi-Stat",effect:"+15% Melee Damage, +15% Max HP, +10% Armor Penetration"},
+    {name:"Tempest Executioner",req:"70 AGI, 70 STR, 40 Light Mastery",category:"High Multi-Stat",effect:"+15% Sprint Speed, +12% Heavy Attack Damage, +8% Light Attack Speed"},
+    {name:"Apex Skirmisher Stance",req:"60 AGI, 60 STR, 40 Gun Mastery",category:"High Multi-Stat",effect:"+12% Ranged Damage, +10% Movement Speed while Aiming, +10% Posture Damage"},
+    {name:"Ironhide Dreadnought",req:"80 VIT, 60 STR, 40 Medium Mastery",category:"High Multi-Stat",effect:"+18% Max HP, +10% Physical Damage, +12% Block Stability"},
+    {name:"Phantasm Bladecraft",req:"70 AGI, 50 VIT, 70 Light Mastery",category:"High Multi-Stat",effect:"+12% Dodge Distance, +12% Light Attack Speed, +8% Health Regeneration"},
+    {name:"Unyielding Gladiator",req:"60 STR, 60 VIT, 60 AGI",category:"High Multi-Stat",effect:"+10% Physical Damage, +10% Max HP, +10% Movement Speed, +10% Stamina Regeneration"},
+    {name:"Colossal Warbringer",req:"80 STR, 50 VIT, 50 Heavy Mastery",category:"High Multi-Stat",effect:"+18% Guard Break Power, +10% Heavy Weapon Damage, +10% Posture Cap"},
+    {name:"Ballistic Phantom",req:"80 AGI, 40 STR, 50 Gun Mastery",category:"High Multi-Stat",effect:"+15% Movement Speed, +12% Gun Damage, +10% Knockback Resistance"},
+    {name:"Aegis Sentinel",req:"80 VIT, 40 STR, 50 Medium Mastery",category:"High Multi-Stat",effect:"+20% Health Regeneration, +10% Parry Timing Window, +8% Physical Damage"},
+    {name:"Cataclysmic Duelist",req:"60 STR, 60 AGI, 50 Medium Mastery",category:"High Multi-Stat",effect:"+12% Physical Damage, +10% Dodge Speed, +10% Counter-Attack Damage"},
+    {name:"Vanguard Breaker",req:"70 STR, 40 VIT, 60 Heavy Mastery",category:"High Multi-Stat",effect:"Heavy attack windups gain hyper armor; +15% Posture Damage"},
+    {name:"Gale Marksman",req:"70 AGI, 50 VIT, 50 Gun Mastery",category:"High Multi-Stat",effect:"Dodging reloads 1 bullet instantly; +10% Dodge Distance, +8% Max HP"},
+    {name:"Titan Fortress",req:"75 STR, 75 VIT, 50 Heavy Mastery",category:"High Multi-Stat",effect:"+15% Physical Damage, +15% Max HP, +15% Posture Damage"},
+    {name:"Blitz Sovereign",req:"75 AGI, 50 STR, 50 Light Mastery",category:"High Multi-Stat",effect:"+15% Movement Speed, +12% Light Weapon Damage, +10% Guard Break Power"}
   ];
 
   // Parse Requirement String (e.g. "10 STR, 10 Heavy Mastery")
