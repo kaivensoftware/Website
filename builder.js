@@ -1,7 +1,6 @@
 /* ==========================================================================
    OMNI SEAS CHARACTER BUILDER & BUILD CALCULATOR ENGINE
-   Official 185 Cards (Cards.txt + morecards.txt + originspecificcards.txt)
-   Max 100 per stat, 250 Total Build Point Cap, 100 Weapon Mastery Cap
+   Max 30 Cards Pick Limit, Clean Titles, 250 Total Stat Cap, 100 Mastery Cap
    ========================================================================== */
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -10,6 +9,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const MAX_SINGLE_STAT = 100;
   const MAX_TOTAL_STATS = 250;
   const MAX_MASTERY_TOTAL = 100;
+  const MAX_EQUIPPED_CARDS = 30;
 
   // DOM Elements
   const strSlider = document.getElementById('strSlider');
@@ -38,7 +38,6 @@ document.addEventListener('DOMContentLoaded', () => {
   const charLevel = document.getElementById('charLevel');
   const archetypeName = document.getElementById('archetypeName');
   const factionBadge = document.getElementById('factionBadge');
-  const startingOmni = document.getElementById('startingOmni');
   const levelPackCount = document.getElementById('levelPackCount');
 
   const healthBonus = document.getElementById('healthBonus');
@@ -51,20 +50,12 @@ document.addEventListener('DOMContentLoaded', () => {
   const factionOptions = document.querySelectorAll('.faction-option');
   let currentFaction = 'Pirates';
 
-  const factionOmniMap = {
-    'Pirates': '50 Omni (Loguetown / Foosha / Orange Town)',
-    'Marines': '75 Omni (Marine Base Headquarters)',
-    'Revolutionaries': '40 Omni (Low-level Archipelago Hideouts)',
-    'Adventurers': '60 Omni (Starter Island Choice)'
-  };
-
   factionOptions.forEach(opt => {
     opt.addEventListener('click', () => {
       factionOptions.forEach(o => o.classList.remove('active'));
       opt.classList.add('active');
       currentFaction = opt.getAttribute('data-faction');
-      factionBadge.textContent = currentFaction.toUpperCase();
-      startingOmni.textContent = factionOmniMap[currentFaction];
+      if (factionBadge) factionBadge.textContent = currentFaction.toUpperCase();
       updateUI();
     });
   });
@@ -404,35 +395,35 @@ document.addEventListener('DOMContentLoaded', () => {
     const remMastery = MAX_MASTERY_TOTAL - masteryTotal;
 
     // Displays
-    strValDisplay.textContent = stats.str;
-    vitValDisplay.textContent = stats.vit;
-    agiValDisplay.textContent = stats.agi;
+    if (strValDisplay) strValDisplay.textContent = stats.str;
+    if (vitValDisplay) vitValDisplay.textContent = stats.vit;
+    if (agiValDisplay) agiValDisplay.textContent = stats.agi;
 
-    lightValDisplay.textContent = stats.light;
-    medValDisplay.textContent = stats.med;
-    heavyValDisplay.textContent = stats.heavy;
-    gunValDisplay.textContent = stats.gun;
+    if (lightValDisplay) lightValDisplay.textContent = stats.light;
+    if (medValDisplay) medValDisplay.textContent = stats.med;
+    if (heavyValDisplay) heavyValDisplay.textContent = stats.heavy;
+    if (gunValDisplay) gunValDisplay.textContent = stats.gun;
 
-    pointsRemaining.textContent = remStats;
-    masteryRemaining.textContent = remMastery;
-    totalAllocated.textContent = total;
+    if (pointsRemaining) pointsRemaining.textContent = remStats;
+    if (masteryRemaining) masteryRemaining.textContent = remMastery;
+    if (totalAllocated) totalAllocated.textContent = total;
 
     const fillPercent = Math.min(100, (total / MAX_TOTAL_STATS) * 100);
-    buildProgressFill.style.width = fillPercent + '%';
+    if (buildProgressFill) buildProgressFill.style.width = fillPercent + '%';
 
     // Level Calculation (1 level per 10 trainable stat points, max 25)
     const level = Math.min(25, Math.floor(total / 10));
-    charLevel.textContent = level;
-    levelPackCount.textContent = `Level ${level} (Max 25)`;
+    if (charLevel) charLevel.textContent = level;
+    if (levelPackCount) levelPackCount.textContent = `Level ${level} (Max 25)`;
 
     // Derived Stats Calculation (+1% HP/HP Regen/Stamina/Stamina Regen, +2.5% Endurance per level)
-    healthBonus.textContent = `+${level}%`;
-    healthRegen.textContent = `+${level}%`;
-    staminaBonus.textContent = `+${level}%`;
-    staminaRegen.textContent = `+${level}%`;
-    enduranceBonus.textContent = `+${(level * 2.5).toFixed(1)}%`;
+    if (healthBonus) healthBonus.textContent = `+${level}%`;
+    if (healthRegen) healthRegen.textContent = `+${level}%`;
+    if (staminaBonus) staminaBonus.textContent = `+${level}%`;
+    if (staminaRegen) staminaRegen.textContent = `+${level}%`;
+    if (enduranceBonus) enduranceBonus.textContent = `+${(level * 2.5).toFixed(1)}%`;
 
-    archetypeName.textContent = calculateBuildArchetype();
+    if (archetypeName) archetypeName.textContent = calculateBuildArchetype();
 
     // Render Cards Library
     renderCardLibrary();
@@ -538,7 +529,7 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   // --------------------------------------------------------------------------
-  // Official Card Library Renderer
+  // Card Library Renderer (Enforcing Max 30 Pick Limit)
   // --------------------------------------------------------------------------
   const cardLibraryGrid = document.getElementById('cardLibraryGrid');
   const equippedCardsList = document.getElementById('equippedCardsList');
@@ -556,13 +547,15 @@ document.addEventListener('DOMContentLoaded', () => {
       return c.category === selectedCategory;
     });
 
+    const isMaxReached = equippedCards.length >= MAX_EQUIPPED_CARDS;
+
     filtered.forEach(card => {
       const isEquipped = equippedCards.some(c => c.name === card.name);
       const reqMet = meetsRequirement(card.req);
 
       const cardEl = document.createElement('div');
       cardEl.className = `drawn-card-item ${reqMet ? '' : 'locked-card'}`;
-      if (!reqMet) {
+      if (!reqMet || (isMaxReached && !isEquipped)) {
         cardEl.style.opacity = '0.5';
       }
 
@@ -570,16 +563,18 @@ document.addEventListener('DOMContentLoaded', () => {
         <div class="card-category-badge">${card.category} | Req: ${card.req}</div>
         <h4 class="card-item-title">${card.name}</h4>
         <p class="card-item-desc">${card.effect}</p>
-        <button class="rs-btn-primary btn-shimmer add-card-btn" ${!reqMet || isEquipped ? 'disabled' : ''} style="padding: 8px 14px; font-size: 0.75rem; width: 100%; margin-top: 12px; ${isEquipped ? 'background: #2ed573; color: #fff;' : ''}">
-          ${isEquipped ? 'EQUIPPED ✓' : reqMet ? '+ ADD TO BUILD' : 'REQ NOT MET'}
+        <button class="rs-btn-primary btn-shimmer add-card-btn" ${!reqMet || isEquipped || isMaxReached ? 'disabled' : ''} style="padding: 8px 14px; font-size: 0.75rem; width: 100%; margin-top: 12px; ${isEquipped ? 'background: #2ed573; color: #fff;' : ''}">
+          ${isEquipped ? 'EQUIPPED ✓' : isMaxReached ? 'MAX 30 CARDS' : reqMet ? '+ ADD TO BUILD' : 'REQ NOT MET'}
         </button>
       `;
 
-      if (reqMet && !isEquipped) {
+      if (reqMet && !isEquipped && !isMaxReached) {
         cardEl.querySelector('.add-card-btn').addEventListener('click', () => {
-          equippedCards.push(card);
-          renderEquippedCards();
-          renderCardLibrary();
+          if (equippedCards.length < MAX_EQUIPPED_CARDS) {
+            equippedCards.push(card);
+            renderEquippedCards();
+            renderCardLibrary();
+          }
         });
       }
 
@@ -588,10 +583,10 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   function renderEquippedCards() {
-    equippedCount.textContent = equippedCards.length;
+    if (equippedCount) equippedCount.textContent = equippedCards.length;
 
     if (equippedCards.length === 0) {
-      equippedCardsList.innerHTML = `<span style="color: var(--text-muted); font-size: 0.85rem;">No talent cards added yet. Click "+ Add to Build" below to select cards!</span>`;
+      equippedCardsList.innerHTML = `<span style="color: var(--text-muted); font-size: 0.85rem;">No talent cards added yet (max 30 cards pick). Click "+ Add to Build" below to select cards!</span>`;
       return;
     }
 

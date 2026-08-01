@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Omni Seas | Character Builder & Build Calculator - Kaiven Software</title>
-  <meta name="description" content="Official Omni Seas Character Builder & Build Calculator. Plan your 250-stat build, weapon masteries, derived endurance stats, origin faction perks, and select talent cards.">
+  <title>Omni Seas | Character Builder - Kaiven Software</title>
+  <meta name="description" content="Official Omni Seas Character Builder. Plan your 250-stat build, weapon masteries, derived endurance stats, and select talent cards.">
   
   <!-- Favicon -->
   <link rel="icon" href="assets/images/omniseas-logo.png" type="image/png">
@@ -75,9 +75,9 @@
         <div class="hero-logo-wrapper" style="margin-bottom: 12px;">
           <img src="assets/images/omniseas-logo.png" alt="Omni Seas Logo" style="width: 100px; height: 100px; object-fit: contain; filter: drop-shadow(0 0 20px var(--rs-cyan));">
         </div>
-        <div class="rs-hero-tag animate-slide-up"><i class="fa-solid fa-sliders text-cyan"></i> OFFICIAL BUILD CALCULATOR</div>
+        <div class="rs-hero-tag animate-slide-up"><i class="fa-solid fa-sliders text-cyan"></i> CHARACTER BUILDER</div>
         <h1 class="rs-hero-title animate-slide-up delay-1" style="font-size: clamp(2.5rem, 5vw, 4rem);">OMNI SEAS CHARACTER BUILDER</h1>
-        <p class="rs-hero-desc animate-slide-up delay-2" style="font-size: 1rem;">Allocate stats (max 100 per stat, 250 total cap), balance weapon masteries, view level scaling multipliers, and select from 185 official talent cards (including faction exclusives).</p>
+        <p class="rs-hero-desc animate-slide-up delay-2" style="font-size: 1rem;">Allocate stats (250 total cap), balance weapon masteries, view level scaling multipliers, and select up to 30 cards.</p>
       </div>
     </div>
   </section>
@@ -95,7 +95,7 @@
           <!-- Faction & Origin Selection -->
           <div class="rs-card builder-card">
             <div class="builder-card-header">
-              <h3><i class="fa-solid fa-flag text-cyan"></i> 1. ORIGIN FACTION & STARTING PORT</h3>
+              <h3><i class="fa-solid fa-flag text-cyan"></i> 1. ORIGIN / FACTION</h3>
             </div>
             <div class="faction-selector">
               <label class="faction-option active" data-faction="Pirates">
@@ -103,7 +103,6 @@
                 <div class="faction-box">
                   <i class="fa-solid fa-skull-crossbones text-cyan"></i>
                   <span class="faction-name">PIRATE</span>
-                  <span class="faction-desc">Starts at Loguetown, Foosha, or Orange Town</span>
                 </div>
               </label>
 
@@ -112,7 +111,6 @@
                 <div class="faction-box">
                   <i class="fa-solid fa-shield-halved text-gold"></i>
                   <span class="faction-name">MARINE</span>
-                  <span class="faction-desc">Starts at Marine Base Headquarters</span>
                 </div>
               </label>
 
@@ -121,7 +119,6 @@
                 <div class="faction-box">
                   <i class="fa-solid fa-flag text-cyan"></i>
                   <span class="faction-name">REVOLUTIONARY</span>
-                  <span class="faction-desc">Starts at secret archipelago hideout</span>
                 </div>
               </label>
 
@@ -130,16 +127,15 @@
                 <div class="faction-box">
                   <i class="fa-solid fa-compass text-gold"></i>
                   <span class="faction-name">ADVENTURER</span>
-                  <span class="faction-desc">Choose starting port; join factions later</span>
                 </div>
               </label>
             </div>
           </div>
 
-          <!-- Trainable Stat Points Allocation (Max 100 per stat, Cap: 250 Total) -->
+          <!-- Trainable Stat Points Allocation (Cap: 250 Total) -->
           <div class="rs-card builder-card" style="margin-top: 24px;">
             <div class="builder-card-header" style="display: flex; justify-content: space-between; align-items: center;">
-              <h3><i class="fa-solid fa-dumbbell text-cyan"></i> 2. PRIMARY TRAINABLE STATS (MAX 100 EACH)</h3>
+              <h3><i class="fa-solid fa-dumbbell text-cyan"></i> 2. STATS</h3>
               <span class="stat-pool-badge" id="statPoolBadge">POINTS REMAINING: <strong id="pointsRemaining" class="text-cyan">250</strong> / 250</span>
             </div>
 
@@ -147,7 +143,6 @@
             <div class="stat-control-group">
               <div class="stat-label-bar">
                 <span class="stat-title"><i class="fa-solid fa-dumbbell text-cyan"></i> Strength</span>
-                <span class="stat-training-desc">Max 100 (Dumbbells & Weights)</span>
                 <span class="stat-val-display" id="strVal">0</span>
               </div>
               <input type="range" id="strSlider" min="0" max="100" value="0" class="rs-slider">
@@ -157,7 +152,6 @@
             <div class="stat-control-group">
               <div class="stat-label-bar">
                 <span class="stat-title"><i class="fa-solid fa-heart-pulse text-cyan"></i> Vitality</span>
-                <span class="stat-training-desc">Max 100 (Combat Damage & Sparring)</span>
                 <span class="stat-val-display" id="vitVal">0</span>
               </div>
               <input type="range" id="vitSlider" min="0" max="100" value="0" class="rs-slider">
@@ -167,7 +161,6 @@
             <div class="stat-control-group">
               <div class="stat-label-bar">
                 <span class="stat-title"><i class="fa-solid fa-person-running text-cyan"></i> Agility</span>
-                <span class="stat-training-desc">Max 100 (Foot Running & Ankle Weights)</span>
                 <span class="stat-val-display" id="agiVal">0</span>
               </div>
               <input type="range" id="agiSlider" min="0" max="100" value="0" class="rs-slider">
@@ -177,7 +170,7 @@
           <!-- Weapon Mastery Allocation (Combined Cap: 100) -->
           <div class="rs-card builder-card" style="margin-top: 24px;">
             <div class="builder-card-header" style="display: flex; justify-content: space-between; align-items: center;">
-              <h3><i class="fa-solid fa-khanda text-gold"></i> 3. WEAPON MASTERY (COMBINED CAP: 100)</h3>
+              <h3><i class="fa-solid fa-khanda text-gold"></i> 3. WEAPON MASTERY</h3>
               <span class="stat-pool-badge" id="masteryPoolBadge">MASTERY REMAINING: <strong id="masteryRemaining" class="text-gold">100</strong> / 100</span>
             </div>
 
@@ -228,7 +221,7 @@
 
         </div>
 
-        <!-- Right Column: Real-Time Character Stats & Official Cards Library -->
+        <!-- Right Column: Real-Time Character Stats & Cards Library -->
         <div class="builder-stats-col">
 
           <!-- Character Overview Card -->
@@ -239,11 +232,8 @@
             </div>
 
             <h2 class="build-archetype-name" id="archetypeName">NOVICE MARINER</h2>
-            <p style="color: var(--text-secondary); font-size: 0.88rem; margin-bottom: 20px;">
-              Starting Omni: <strong id="startingOmni" class="text-gold">50 Omni</strong> (Random 25-100)
-            </p>
 
-            <div class="derived-stats-grid">
+            <div class="derived-stats-grid" style="margin-top: 20px;">
               <div class="derived-stat-box">
                 <span class="d-label">Max Health Bonus</span>
                 <span class="d-val text-cyan" id="healthBonus">+0%</span>
@@ -277,16 +267,16 @@
             </div>
           </div>
 
-          <!-- Official Talent Card Library Selector -->
+          <!-- Talent Card Library Selector -->
           <div class="rs-card builder-card" style="margin-top: 24px; padding: 28px;">
             <div class="builder-card-header" style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px;">
-              <h3><i class="fa-solid fa-layer-group text-cyan"></i> OFFICIAL TALENT CARDS (185 TOTAL)</h3>
-              <span class="stat-pool-badge">CARDS EQUIPPED: <strong id="equippedCount" class="text-cyan">0</strong></span>
+              <h3><i class="fa-solid fa-layer-group text-cyan"></i> CARDS</h3>
+              <span class="stat-pool-badge">CARDS EQUIPPED: <strong id="equippedCount" class="text-cyan">0</strong> / 30</span>
             </div>
 
             <!-- Equipped Cards Tray -->
             <div class="equipped-cards-list" id="equippedCardsList" style="margin-bottom: 20px; padding: 12px; background: var(--rs-dark-2); border-radius: 6px;">
-              <span style="color: var(--text-muted); font-size: 0.85rem;">No talent cards added yet. Click "+ Add to Build" below to select cards!</span>
+              <span style="color: var(--text-muted); font-size: 0.85rem;">No talent cards added yet (max 30 cards pick). Click "+ Add to Build" below to select cards!</span>
             </div>
 
             <!-- Category Filter Tabs -->
@@ -306,7 +296,7 @@
 
             <!-- Available Card Library Grid -->
             <div class="drawn-cards-grid" id="cardLibraryGrid" style="max-height: 480px; overflow-y: auto; padding-right: 6px;">
-              <!-- Dynamically populated via Cards.txt, morecards.txt & originspecificcards.txt -->
+              <!-- Dynamically populated via builder.js -->
             </div>
           </div>
 
