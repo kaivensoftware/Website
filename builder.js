@@ -74,7 +74,7 @@ document.addEventListener('DOMContentLoaded', () => {
   let equippedCards = [];
   let selectedCategory = 'ALL';
 
-  // 185 Official Cards (150 Cards.txt + 15 morecards.txt + 20 originspecificcards.txt)
+  // 185 Cards (150 Cards.txt + 15 morecards.txt + 20 originspecificcards.txt)
   const cardPool = [
     // Strength
     {name:"Heavy Hauler",req:"0 STR",category:"Strength",effect:"+3% Carrying Capacity, +2% Grip Damage"},
