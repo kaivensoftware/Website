@@ -1282,40 +1282,49 @@ body.kaiven-site {
   transition: width 0.3s ease;
 }
 
-/* Card Draw Simulator */
-.cards-draw-container {
-  min-height: 160px;
+/* Filter Tabs */
+.filter-tab {
   background: var(--rs-dark-2);
-  border: 1px dashed var(--rs-border);
-  border-radius: 6px;
-  padding: 16px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  border: 1px solid var(--rs-border);
+  color: var(--text-secondary);
+  padding: 6px 12px;
+  font-size: 0.7rem;
+  font-weight: 800;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: var(--transition-fast);
 }
 
-.card-draw-placeholder {
-  text-align: center;
-  color: var(--text-muted);
+.filter-tab:hover, .filter-tab.active {
+  background: var(--rs-cyan);
+  color: #03060d;
+  border-color: var(--rs-cyan);
+  box-shadow: 0 0 10px var(--rs-cyan-glow);
 }
 
+/* Card Selection Grid */
 .drawn-cards-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
   gap: 12px;
   width: 100%;
 }
 
 .drawn-card-item {
   background: var(--rs-card-bg);
-  border: 1px solid var(--rs-cyan);
+  border: 1px solid var(--rs-border);
   border-radius: 6px;
   padding: 12px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   text-align: center;
-  box-shadow: 0 0 12px var(--rs-cyan-glow);
+  transition: var(--transition-fast);
+}
+
+.drawn-card-item:hover {
+  border-color: var(--rs-cyan);
+  transform: translateY(-2px);
 }
 
 .card-category-badge {

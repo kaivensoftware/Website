@@ -77,7 +77,7 @@
         </div>
         <div class="rs-hero-tag animate-slide-up"><i class="fa-solid fa-sliders text-cyan"></i> OFFICIAL BUILD CALCULATOR</div>
         <h1 class="rs-hero-title animate-slide-up delay-1" style="font-size: clamp(2.5rem, 5vw, 4rem);">OMNI SEAS CHARACTER BUILDER</h1>
-        <p class="rs-hero-desc animate-slide-up delay-2" style="font-size: 1rem;">Allocate stats (max 100 per stat, 250 total cap), balance weapon masteries, view level scaling multipliers, and select talent cards.</p>
+        <p class="rs-hero-desc animate-slide-up delay-2" style="font-size: 1rem;">Allocate stats (max 100 per stat, 250 total cap), balance weapon masteries, view level scaling multipliers, and select from 150 official talent cards.</p>
       </div>
     </div>
   </section>
@@ -228,7 +228,7 @@
 
         </div>
 
-        <!-- Right Column: Real-Time Character Stats & Card Selection Library -->
+        <!-- Right Column: Real-Time Character Stats & Official Cards Library -->
         <div class="builder-stats-col">
 
           <!-- Character Overview Card -->
@@ -277,10 +277,10 @@
             </div>
           </div>
 
-          <!-- Talent Card Selector Library -->
+          <!-- Official Talent Card Library Selector -->
           <div class="rs-card builder-card" style="margin-top: 24px; padding: 28px;">
             <div class="builder-card-header" style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px;">
-              <h3><i class="fa-solid fa-layer-group text-cyan"></i> SELECT TALENT CARDS</h3>
+              <h3><i class="fa-solid fa-layer-group text-cyan"></i> OFFICIAL TALENT CARDS (150 TOTAL)</h3>
               <span class="stat-pool-badge">CARDS EQUIPPED: <strong id="equippedCount" class="text-cyan">0</strong></span>
             </div>
 
@@ -289,10 +289,22 @@
               <span style="color: var(--text-muted); font-size: 0.85rem;">No talent cards added yet. Click "+ Add to Build" below to select cards!</span>
             </div>
 
+            <!-- Category Filter Tabs -->
+            <div class="card-filter-tabs" id="cardFilterTabs" style="display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 16px;">
+              <button class="filter-tab active" data-cat="ALL">ALL CARDS</button>
+              <button class="filter-tab" data-cat="Strength">STRENGTH</button>
+              <button class="filter-tab" data-cat="Vitality">VITALITY</button>
+              <button class="filter-tab" data-cat="Agility">AGILITY</button>
+              <button class="filter-tab" data-cat="Light Mastery">LIGHT</button>
+              <button class="filter-tab" data-cat="Medium Mastery">MEDIUM</button>
+              <button class="filter-tab" data-cat="Heavy Mastery">HEAVY</button>
+              <button class="filter-tab" data-cat="Gun Mastery">GUN</button>
+              <button class="filter-tab" data-cat="Mixed">MIXED</button>
+            </div>
+
             <!-- Available Card Library Grid -->
-            <h4 style="font-size: 0.9rem; font-weight: 800; color: var(--text-secondary); margin-bottom: 12px;">AVAILABLE TALENT CARDS:</h4>
-            <div class="drawn-cards-grid" id="cardLibraryGrid">
-              <!-- Dynamically populated via builder.js -->
+            <div class="drawn-cards-grid" id="cardLibraryGrid" style="max-height: 480px; overflow-y: auto; padding-right: 6px;">
+              <!-- Dynamically populated via Cards.txt -->
             </div>
           </div>
 
