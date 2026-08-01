@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Omni Seas | Character Builder & Build Calculator - Kaiven Software</title>
+  <meta name="description" content="Official Omni Seas Character Builder & Build Calculator. Plan your 250-stat build, weapon masteries, derived endurance stats, and simulate 5-card level draw packs.">
+  
+  <!-- Favicon -->
+  <link rel="icon" href="assets/images/omniseas-logo.png" type="image/png">
+
+  <!-- Google Fonts: Inter & Orbitron -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Orbitron:wght@700;800;900&display=swap" rel="stylesheet">
+
+  <!-- FontAwesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+  <link rel="stylesheet" href="style.css">
+</head>
+<body class="kaiven-site">
+
+  <!-- Background Canvas -->
+  <canvas id="oceanCanvas"></canvas>
+  <div class="rs-grid-overlay"></div>
+
+  <!-- Top Navigation Bar -->
+  <header class="rs-navbar" id="navbar">
+    <div class="rs-nav-container">
+
+      <!-- Left: Logo & Core Nav -->
+      <div class="rs-nav-left">
+        <a href="index.html" class="rs-logo-link" title="Kaiven Software Home">
+          <div class="rs-logo-box glow-hover">
+            <img src="assets/images/logo.png" alt="Logo" class="rs-logo-img">
+          </div>
+        </a>
+
+        <nav class="rs-main-menu" id="mainMenu">
+          <a href="index.html" class="rs-menu-item"><i class="fa-solid fa-arrow-left"></i> HOME</a>
+          <a href="omni-seas.html" class="rs-menu-item">GAMES</a>
+          <a href="builder.html" class="rs-menu-item active">BUILDER</a>
+          <a href="store.html" class="rs-menu-item">STORE</a>
+          <a href="https://www.roblox.com/communities/674886308/Kaiven-Software" target="_blank" class="rs-menu-item">COMMUNITY</a>
+        </nav>
+      </div>
+
+      <!-- Right: Utility Actions & Account -->
+      <div class="rs-nav-right">
+        <a href="https://www.roblox.com/games/127945167767729/Omni-Seas" target="_blank" class="rs-btn-launcher btn-shimmer">
+          PLAY
+        </a>
+        <button class="rs-icon-btn" id="openSearchBtn" title="Search">
+          <i class="fa-solid fa-magnifying-glass"></i>
+        </button>
+        <a href="https://discord.gg/ccWf2pxShW" target="_blank" class="rs-user-btn" title="Discord Community">
+          <i class="fa-brands fa-discord"></i>
+        </a>
+        <button class="rs-hamburger-btn" id="mobileToggle" aria-label="Toggle Navigation">
+          <i class="fa-solid fa-bars"></i>
+        </button>
+      </div>
+
+    </div>
+  </header>
+
+  <!-- Builder Hero Banner -->
+  <section class="rs-hero" style="min-height: 40vh; padding-top: 130px; padding-bottom: 40px;">
+    <div class="rs-hero-backdrop"></div>
+    <div class="rs-hero-gradient"></div>
+
+    <div class="rs-hero-container container text-center">
+      <div class="rs-hero-card" style="margin: 0 auto; max-width: 850px;">
+        <div class="hero-logo-wrapper" style="margin-bottom: 12px;">
+          <img src="assets/images/omniseas-logo.png" alt="Omni Seas Logo" style="width: 100px; height: 100px; object-fit: contain; filter: drop-shadow(0 0 20px var(--rs-cyan));">
+        </div>
+        <div class="rs-hero-tag animate-slide-up"><i class="fa-solid fa-sliders text-cyan"></i> OFFICIAL BUILD CALCULATOR</div>
+        <h1 class="rs-hero-title animate-slide-up delay-1" style="font-size: clamp(2.5rem, 5vw, 4rem);">OMNI SEAS CHARACTER BUILDER</h1>
+        <p class="rs-hero-desc animate-slide-up delay-2" style="font-size: 1rem;">Allocate 250 trainable stat points, balance weapon masteries, view level scaling multipliers, and simulate your 5-card level draw packs.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Main Character Builder Grid Section -->
+  <section class="rs-newswire-section" style="padding-top: 20px; padding-bottom: 80px;">
+    <div class="container">
+
+      <!-- Builder Main Grid: Left Controls, Right Stats Summary -->
+      <div class="builder-grid">
+
+        <!-- Left Column: Faction & Stat Allocation Controls -->
+        <div class="builder-controls-col">
+
+          <!-- Faction & Origin Selection -->
+          <div class="rs-card builder-card">
+            <div class="builder-card-header">
+              <h3><i class="fa-solid fa-flag text-cyan"></i> 1. ORIGIN FACTION & STARTING PORT</h3>
+            </div>
+            <div class="faction-selector">
+              <label class="faction-option active" data-faction="Pirates">
+                <input type="radio" name="faction" value="Pirates" checked>
+                <div class="faction-box">
+                  <i class="fa-solid fa-skull-crossbones text-cyan"></i>
+                  <span class="faction-name">PIRATE</span>
+                  <span class="faction-desc">Starts at Loguetown, Foosha, or Orange Town</span>
+                </div>
+              </label>
+
+              <label class="faction-option" data-faction="Marines">
+                <input type="radio" name="faction" value="Marines">
+                <div class="faction-box">
+                  <i class="fa-solid fa-shield-halved text-gold"></i>
+                  <span class="faction-name">MARINE</span>
+                  <span class="faction-desc">Starts at Marine Base Headquarters</span>
+                </div>
+              </label>
+
+              <label class="faction-option" data-faction="Revolutionaries">
+                <input type="radio" name="faction" value="Revolutionaries">
+                <div class="faction-box">
+                  <i class="fa-solid fa-flag text-cyan"></i>
+                  <span class="faction-name">REVOLUTIONARY</span>
+                  <span class="faction-desc">Starts at secret archipelago hideout</span>
+                </div>
+              </label>
+
+              <label class="faction-option" data-faction="Adventurers">
+                <input type="radio" name="faction" value="Adventurers">
+                <div class="faction-box">
+                  <i class="fa-solid fa-compass text-gold"></i>
+                  <span class="faction-name">ADVENTURER</span>
+                  <span class="faction-desc">Choose starting port; join factions later</span>
+                </div>
+              </label>
+            </div>
+          </div>
+
+          <!-- Trainable Stat Points Allocation (Cap: 250) -->
+          <div class="rs-card builder-card" style="margin-top: 24px;">
+            <div class="builder-card-header" style="display: flex; justify-content: space-between; align-items: center;">
+              <h3><i class="fa-solid fa-dumbbell text-cyan"></i> 2. PRIMARY TRAINABLE STATS</h3>
+              <span class="stat-pool-badge" id="statPoolBadge">POINTS REMAINING: <strong id="pointsRemaining" class="text-cyan">250</strong> / 250</span>
+            </div>
+
+            <!-- Strength Slider -->
+            <div class="stat-control-group">
+              <div class="stat-label-bar">
+                <span class="stat-title"><i class="fa-solid fa-dumbbell text-cyan"></i> Strength</span>
+                <span class="stat-training-desc">Dumbbells & Weights</span>
+                <span class="stat-val-display" id="strVal">0</span>
+              </div>
+              <input type="range" id="strSlider" min="0" max="250" value="0" class="rs-slider">
+            </div>
+
+            <!-- Vitality Slider -->
+            <div class="stat-control-group">
+              <div class="stat-label-bar">
+                <span class="stat-title"><i class="fa-solid fa-heart-pulse text-cyan"></i> Vitality</span>
+                <span class="stat-training-desc">Combat & Sparring Damage</span>
+                <span class="stat-val-display" id="vitVal">0</span>
+              </div>
+              <input type="range" id="vitSlider" min="0" max="250" value="0" class="rs-slider">
+            </div>
+
+            <!-- Agility Slider -->
+            <div class="stat-control-group">
+              <div class="stat-label-bar">
+                <span class="stat-title"><i class="fa-solid fa-person-running text-cyan"></i> Agility</span>
+                <span class="stat-training-desc">Foot Running & Ankle Weights</span>
+                <span class="stat-val-display" id="agiVal">0</span>
+              </div>
+              <input type="range" id="agiSlider" min="0" max="250" value="0" class="rs-slider">
+            </div>
+          </div>
+
+          <!-- Weapon Mastery Allocation (Combined Cap: 100) -->
+          <div class="rs-card builder-card" style="margin-top: 24px;">
+            <div class="builder-card-header" style="display: flex; justify-content: space-between; align-items: center;">
+              <h3><i class="fa-solid fa-khanda text-gold"></i> 3. WEAPON MASTERY (COMBINED CAP: 100)</h3>
+              <span class="stat-pool-badge" id="masteryPoolBadge">MASTERY REMAINING: <strong id="masteryRemaining" class="text-gold">100</strong> / 100</span>
+            </div>
+
+            <!-- Light Weapon -->
+            <div class="stat-control-group">
+              <div class="stat-label-bar">
+                <span class="stat-title">Light Weapon</span>
+                <span class="stat-val-display" id="lightVal">0</span>
+              </div>
+              <input type="range" id="lightSlider" min="0" max="100" value="0" class="rs-slider gold-slider">
+            </div>
+
+            <!-- Medium Weapon -->
+            <div class="stat-control-group">
+              <div class="stat-label-bar">
+                <span class="stat-title">Medium Weapon</span>
+                <span class="stat-val-display" id="medVal">0</span>
+              </div>
+              <input type="range" id="medSlider" min="0" max="100" value="0" class="rs-slider gold-slider">
+            </div>
+
+            <!-- Heavy Weapon -->
+            <div class="stat-control-group">
+              <div class="stat-label-bar">
+                <span class="stat-title">Heavy Weapon</span>
+                <span class="stat-val-display" id="heavyVal">0</span>
+              </div>
+              <input type="range" id="heavySlider" min="0" max="100" value="0" class="rs-slider gold-slider">
+            </div>
+
+            <!-- Gun -->
+            <div class="stat-control-group">
+              <div class="stat-label-bar">
+                <span class="stat-title">Gun</span>
+                <span class="stat-val-display" id="gunVal">0</span>
+              </div>
+              <input type="range" id="gunSlider" min="0" max="100" value="0" class="rs-slider gold-slider">
+            </div>
+          </div>
+
+          <!-- Preset Quick Builds & Reset -->
+          <div style="margin-top: 24px; display: flex; gap: 12px; flex-wrap: wrap;">
+            <button class="rs-btn-secondary" id="presetHeavyBtn"><i class="fa-solid fa-shield"></i> Heavy Juggernaut</button>
+            <button class="rs-btn-secondary" id="presetGunslingerBtn"><i class="fa-solid fa-crosshair"></i> Agile Gunslinger</button>
+            <button class="rs-btn-secondary" id="presetBalancedBtn"><i class="fa-solid fa-scale-balanced"></i> Balanced Marauder</button>
+            <button class="rs-btn-secondary" id="resetBuildBtn" style="border-color: #ff4757; color: #ff4757;"><i class="fa-solid fa-rotate-left"></i> Reset Build</button>
+          </div>
+
+        </div>
+
+        <!-- Right Column: Real-Time Character Stats & Card Draw Simulator -->
+        <div class="builder-stats-col">
+
+          <!-- Character Overview Card -->
+          <div class="rs-card builder-card glow-card" style="padding: 28px;">
+            <div class="builder-summary-header">
+              <span class="rs-card-category" id="factionBadge">PIRATES</span>
+              <div class="level-badge">LEVEL <span id="charLevel" class="text-cyan">0</span> / 25</div>
+            </div>
+
+            <h2 class="build-archetype-name" id="archetypeName">NOVICE MARINER</h2>
+            <p style="color: var(--text-secondary); font-size: 0.88rem; margin-bottom: 20px;">
+              Starting Omni: <strong id="startingOmni" class="text-gold">50 Omni</strong> (Random 25-100)
+            </p>
+
+            <div class="derived-stats-grid">
+              <div class="derived-stat-box">
+                <span class="d-label">Max Health Bonus</span>
+                <span class="d-val text-cyan" id="healthBonus">+0%</span>
+              </div>
+              <div class="derived-stat-box">
+                <span class="d-label">Health Regen</span>
+                <span class="d-val text-cyan" id="healthRegen">+0%</span>
+              </div>
+              <div class="derived-stat-box">
+                <span class="d-label">Max Stamina Bonus</span>
+                <span class="d-val text-cyan" id="staminaBonus">+0%</span>
+              </div>
+              <div class="derived-stat-box">
+                <span class="d-label">Stamina Regen</span>
+                <span class="d-val text-cyan" id="staminaRegen">+0%</span>
+              </div>
+              <div class="derived-stat-box full-width">
+                <span class="d-label">Endurance / Posture Defense</span>
+                <span class="d-val text-gold" id="enduranceBonus">+0%</span>
+              </div>
+            </div>
+
+            <div class="build-progress-bar-wrapper">
+              <div class="build-progress-label">
+                <span>Stat Point Cap: <strong id="totalAllocated">0</strong> / 250</span>
+                <span id="levelPackCount">0 Card Packs Available</span>
+              </div>
+              <div class="build-progress-track">
+                <div class="build-progress-fill" id="buildProgressFill" style="width: 0%;"></div>
+              </div>
+            </div>
+          </div>
+
+          <!-- 5-Card Draw Level-Up Simulator Card -->
+          <div class="rs-card builder-card" style="margin-top: 24px; padding: 28px;">
+            <div class="builder-card-header" style="display: flex; justify-content: space-between; align-items: center;">
+              <h3><i class="fa-solid fa-box-open text-cyan"></i> 5-CARD DRAW SIMULATOR</h3>
+              <button class="rs-btn-primary btn-shimmer" id="drawCardsBtn" style="padding: 10px 18px; font-size: 0.8rem;">
+                <i class="fa-solid fa-clone"></i> DRAW 5 CARDS
+              </button>
+            </div>
+            <p style="color: var(--text-secondary); font-size: 0.88rem; margin-bottom: 20px;">
+              Draw 5 talent cards based on your allocated stats. Select 1 card to add to your character deck!
+            </p>
+
+            <!-- Card Draw Deck Container -->
+            <div class="cards-draw-container" id="cardsDrawContainer">
+              <div class="card-draw-placeholder">
+                <i class="fa-solid fa-cards text-cyan" style="font-size: 2.5rem; margin-bottom: 12px;"></i>
+                <p>Click <strong>"DRAW 5 CARDS"</strong> to open your level draw pack!</p>
+              </div>
+            </div>
+
+            <!-- Active Equipped Deck -->
+            <div class="equipped-deck-section" style="margin-top: 24px; border-top: 1px solid var(--rs-border); padding-top: 20px;">
+              <h4 style="font-size: 0.95rem; font-weight: 800; margin-bottom: 12px; color: var(--rs-cyan);">
+                <i class="fa-solid fa-layer-group"></i> EQUIPPED TALENT CARDS (<span id="equippedCount">0</span>)
+              </h4>
+              <div class="equipped-cards-list" id="equippedCardsList">
+                <span style="color: var(--text-muted); font-size: 0.85rem;">No talent cards selected yet.</span>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Universal Footer -->
+  <footer class="rs-footer">
+    <div class="container">
+
+      <div class="rs-footer-top">
+        <div class="rs-lang-selector">
+          <i class="fa-solid fa-globe"></i> <span>ENGLISH (US)</span>
+        </div>
+
+        <div class="rs-footer-socials">
+          <a href="https://discord.gg/ccWf2pxShW" target="_blank" title="Discord"><i class="fa-brands fa-discord"></i></a>
+          <a href="https://www.youtube.com/@kaivensoftware" target="_blank" title="YouTube"><i class="fa-brands fa-youtube"></i></a>
+          <a href="https://www.roblox.com/communities/674886308/Kaiven-Software" target="_blank" title="Roblox Group"><i class="fa-solid fa-cube"></i></a>
+          <a href="https://github.com/kaivensoftware" target="_blank" title="GitHub"><i class="fa-brands fa-github"></i></a>
+        </div>
+      </div>
+
+      <div class="rs-footer-links">
+        <a href="index.html#support">Contact</a>
+        <a href="https://www.roblox.com/communities/674886308/Kaiven-Software" target="_blank">Careers</a>
+        <a href="#">Privacy Policy</a>
+      </div>
+
+      <div class="rs-footer-bottom">
+        <div class="rs-footer-brand">
+          <img src="assets/images/logo.png" alt="Logo" class="rs-footer-emblem">
+          <span>KAIVEN SOFTWARE</span>
+        </div>
+        <p class="rs-copyright">Kaiven Software, Inc. © 2026. Omni Seas and Kaiven Software logos are trademarks of Kaiven Software. All rights reserved.</p>
+      </div>
+
+    </div>
+  </footer>
+
+  <!-- Search Modal -->
+  <div class="rs-search-overlay" id="searchModal">
+    <div class="rs-search-container">
+      <button class="rs-search-close" id="closeSearchBtn"><i class="fa-solid fa-xmark"></i></button>
+      <div class="rs-search-box">
+        <i class="fa-solid fa-magnifying-glass rs-search-icon"></i>
+        <input type="text" id="searchInput" placeholder="SEARCH KAIVEN SOFTWARE & GAMES..." autofocus>
+      </div>
+      <div class="rs-search-results" id="searchResults">
+        <div class="rs-search-quick">
+          <span>QUICK LINKS:</span>
+          <a href="omni-seas.html">Omni Seas Page</a>
+          <a href="builder.html">Character Builder</a>
+          <a href="https://discord.gg/ccWf2pxShW" target="_blank">Join Discord</a>
+          <a href="store.html">Store Page</a>
+          <a href="https://www.roblox.com/games/127945167767729/Omni-Seas" target="_blank">Play Omni Seas</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="app.js"></script>
+  <script src="builder.js"></script>
+</body>
+</html>
