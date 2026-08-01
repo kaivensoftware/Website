@@ -1,12 +1,13 @@
 /* ==========================================================================
-   KAIVEN SOFTWARE - OMNI SEAS GRADIENT PASSES DESIGN SYSTEM
-   Palette: Deep Abyssal Black (#03060d), Dark Slate Grey (#0b1220), 
-            Omni Seas Abyssal Blue & Electric Cyan (#004066 -> #00f2fe)
+   KAIVEN SOFTWARE - SOFT GRADIENT PASSES DESIGN SYSTEM
+   Smooth gradient aura passes between titles and sections.
+   Color Palette: Deep Abyssal Black (#03060d), Dark Slate Grey (#0b1220), 
+                  Omni Seas Abyssal Blue & Electric Cyan (#002844 -> #00f2fe)
    ========================================================================== */
 
 :root {
   --rs-black: #03060d;
-  --rs-dark-1: #070e1c;
+  --rs-dark-1: #070d18;
   --rs-dark-2: #0e1b34;
   --rs-card-bg: rgba(14, 27, 52, 0.75);
   --rs-border: #182c4d;
@@ -47,11 +48,15 @@ html {
   overflow-x: hidden;
 }
 
-/* Body with Dynamic Multi-Pass Gradient Waves (No Grid) */
+/* Body with Rich Fixed Multi-Point Radial Gradient Passes */
 body.kaiven-site {
-  background: linear-gradient(140deg, #020408 0%, #070d18 30%, #002844 65%, #081224 100%);
-  background-size: 200% 200%;
-  animation: gradientPasses 18s ease infinite alternate;
+  background-color: #03060d;
+  background-image: 
+    radial-gradient(circle at 50% 0%, rgba(0, 242, 254, 0.18) 0%, rgba(0, 40, 75, 0.12) 40%, transparent 70%),
+    radial-gradient(circle at 15% 35%, rgba(0, 80, 140, 0.2) 0%, transparent 60%),
+    radial-gradient(circle at 85% 65%, rgba(0, 242, 254, 0.14) 0%, transparent 60%),
+    radial-gradient(circle at 50% 100%, rgba(14, 27, 52, 0.8) 0%, transparent 70%);
+  background-attachment: fixed;
   color: var(--text-primary);
   line-height: 1.5;
   min-height: 100vh;
@@ -59,19 +64,7 @@ body.kaiven-site {
   position: relative;
 }
 
-@keyframes gradientPasses {
-  0% {
-    background-position: 0% 20%;
-  }
-  50% {
-    background-position: 100% 80%;
-  }
-  100% {
-    background-position: 20% 100%;
-  }
-}
-
-/* Canvas Overlay */
+/* Canvas Overlay for Soft Floating Embers */
 #oceanCanvas {
   position: fixed;
   top: 0;
@@ -80,10 +73,10 @@ body.kaiven-site {
   height: 100%;
   pointer-events: none;
   z-index: 0;
-  opacity: 0.55;
+  opacity: 0.6;
 }
 
-/* Grid Overlay Removed completely */
+/* Grid Overlay Removed */
 .rs-grid-overlay {
   display: none !important;
 }
@@ -383,7 +376,7 @@ body.kaiven-site {
   box-shadow: 0 8px 25px var(--rs-gold-glow);
 }
 
-/* Hero Carousel */
+/* Hero Carousel with Smooth Radial Ambient Glow */
 .rs-hero {
   position: relative;
   min-height: 85vh;
@@ -400,7 +393,7 @@ body.kaiven-site {
   left: 0;
   width: 100%;
   height: 100%;
-  background: radial-gradient(circle at 60% 40%, rgba(0, 242, 254, 0.18) 0%, transparent 70%);
+  background: radial-gradient(ellipse 90% 60% at 50% 30%, rgba(0, 242, 254, 0.2) 0%, rgba(0, 40, 75, 0.12) 50%, transparent 80%);
   z-index: 1;
 }
 
@@ -496,25 +489,46 @@ body.kaiven-site {
   box-shadow: 0 0 10px var(--rs-cyan);
 }
 
-/* Cards Grid */
-.rs-newswire-section {
-  padding: 80px 0;
+/* Sections with Gradient Passes Between Titles */
+.rs-newswire-section, .rs-games-section, .rs-promo-banner, .rs-contact-section {
+  position: relative;
+  padding: 90px 0;
   background: transparent;
 }
 
 .rs-section-header {
+  position: relative;
   display: flex;
   justify-content: space-between;
   align-items: flex-end;
-  margin-bottom: 32px;
+  margin-bottom: 36px;
   border-bottom: 1px solid var(--rs-border);
-  padding-bottom: 16px;
+  padding-bottom: 18px;
+}
+
+/* Soft Ambient Radial Light Pass under Section Titles */
+.rs-section-header::before, .builder-card-header::before {
+  content: '';
+  position: absolute;
+  top: -30px;
+  left: 0;
+  width: 350px;
+  height: 90px;
+  background: radial-gradient(ellipse at left, rgba(0, 242, 254, 0.18) 0%, rgba(0, 45, 80, 0.08) 50%, transparent 75%);
+  pointer-events: none;
+  z-index: 0;
+  filter: blur(15px);
 }
 
 .rs-section-title {
+  position: relative;
+  z-index: 2;
   font-size: 1.8rem;
   font-weight: 900;
   letter-spacing: 0.08em;
+  background: linear-gradient(135deg, #ffffff 30%, var(--rs-cyan) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
 }
 
 .rs-view-all {
@@ -632,8 +646,7 @@ body.kaiven-site {
 /* Featured Games Section */
 .rs-games-section {
   padding: 80px 0;
-  background: rgba(4, 9, 18, 0.6);
-  backdrop-filter: blur(10px);
+  background: radial-gradient(ellipse 80% 50% at 50% 50%, rgba(7, 14, 28, 0.8) 0%, transparent 100%);
 }
 
 .rs-games-grid {
@@ -698,11 +711,6 @@ body.kaiven-site {
 }
 
 /* Promo Banner Section */
-.rs-promo-banner {
-  padding: 80px 0;
-  background: transparent;
-}
-
 .rs-promo-card {
   background: linear-gradient(135deg, rgba(9, 18, 36, 0.85) 0%, rgba(13, 27, 54, 0.85) 100%);
   backdrop-filter: blur(12px);
@@ -748,8 +756,7 @@ body.kaiven-site {
 /* Newsletter Section */
 .rs-newsletter-section {
   padding: 70px 0;
-  background: rgba(4, 9, 18, 0.6);
-  backdrop-filter: blur(10px);
+  background: radial-gradient(circle at 50% 50%, rgba(0, 242, 254, 0.08) 0%, transparent 70%);
 }
 
 .rs-newsletter-box {
@@ -793,11 +800,6 @@ body.kaiven-site {
 }
 
 /* Contact Section */
-.rs-contact-section {
-  padding: 80px 0;
-  background: transparent;
-}
-
 .rs-contact-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;

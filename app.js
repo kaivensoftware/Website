@@ -5,7 +5,7 @@
 document.addEventListener('DOMContentLoaded', () => {
 
   // --------------------------------------------------------------------------
-  // 1. Interactive Background Particle Canvas
+  // 1. Soft Ambient Canvas Glows (No Tech Lines)
   // --------------------------------------------------------------------------
   const canvas = document.getElementById('oceanCanvas');
   if (canvas) {
@@ -19,7 +19,7 @@ document.addEventListener('DOMContentLoaded', () => {
       height = canvas.height = window.innerHeight;
     });
 
-    const mouse = { x: null, y: null, radius: 180 };
+    const mouse = { x: null, y: null, radius: 220 };
     window.addEventListener('mousemove', (e) => {
       mouse.x = e.clientX;
       mouse.y = e.clientY;
@@ -29,10 +29,10 @@ document.addEventListener('DOMContentLoaded', () => {
       constructor() {
         this.x = Math.random() * width;
         this.y = Math.random() * height;
-        this.vx = (Math.random() - 0.5) * 0.7;
-        this.vy = (Math.random() - 0.5) * 0.7;
-        this.size = Math.random() * 2 + 1;
-        this.color = Math.random() > 0.4 ? '#00f2fe' : '#e0a938';
+        this.vx = (Math.random() - 0.5) * 0.4;
+        this.vy = (Math.random() - 0.5) * 0.4;
+        this.size = Math.random() * 3 + 1.5;
+        this.color = Math.random() > 0.3 ? 'rgba(0, 242, 254, 0.4)' : 'rgba(224, 169, 56, 0.3)';
       }
 
       update() {
@@ -48,8 +48,8 @@ document.addEventListener('DOMContentLoaded', () => {
           const dist = Math.sqrt(dx * dx + dy * dy);
           if (dist < mouse.radius) {
             const force = (mouse.radius - dist) / mouse.radius;
-            this.x -= (dx / dist) * force * 3;
-            this.y -= (dy / dist) * force * 3;
+            this.x -= (dx / dist) * force * 2;
+            this.y -= (dy / dist) * force * 2;
           }
         }
       }
@@ -58,14 +58,15 @@ document.addEventListener('DOMContentLoaded', () => {
         ctx.beginPath();
         ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
         ctx.fillStyle = this.color;
-        ctx.shadowBlur = 6;
+        ctx.shadowBlur = 12;
         ctx.shadowColor = this.color;
         ctx.fill();
         ctx.shadowBlur = 0;
       }
     }
 
-    const particles = Array.from({ length: 70 }, () => new Particle());
+    // Soft ambient floating ember dots only - NO CONNECTING LINES
+    const particles = Array.from({ length: 45 }, () => new Particle());
 
     function animateCanvas() {
       ctx.clearRect(0, 0, width, height);
@@ -73,21 +74,6 @@ document.addEventListener('DOMContentLoaded', () => {
       for (let i = 0; i < particles.length; i++) {
         particles[i].update();
         particles[i].draw();
-
-        for (let j = i + 1; j < particles.length; j++) {
-          const dx = particles[i].x - particles[j].x;
-          const dy = particles[i].y - particles[j].y;
-          const dist = Math.sqrt(dx * dx + dy * dy);
-
-          if (dist < 120) {
-            ctx.beginPath();
-            ctx.moveTo(particles[i].x, particles[i].y);
-            ctx.lineTo(particles[j].x, particles[j].y);
-            ctx.strokeStyle = `rgba(0, 242, 254, ${1 - dist / 120 * 0.5})`;
-            ctx.lineWidth = 0.5;
-            ctx.stroke();
-          }
-        }
       }
       requestAnimationFrame(animateCanvas);
     }
