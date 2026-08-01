@@ -1,8 +1,7 @@
 /* ==========================================================================
-   KAIVEN SOFTWARE - SOFT GRADIENT PASSES DESIGN SYSTEM
-   Smooth gradient aura passes between titles and sections.
-   Color Palette: Deep Abyssal Black (#03060d), Dark Slate Grey (#0b1220), 
-                  Omni Seas Abyssal Blue & Electric Cyan (#002844 -> #00f2fe)
+   KAIVEN SOFTWARE - SEAMLESS CONTINUOUS BACKGROUND GRADIENT
+   Palette: Deep Abyssal Black (#03060d), Dark Slate Grey (#0b1220), 
+            Omni Seas Abyssal Blue & Electric Cyan (#002844 -> #00f2fe)
    ========================================================================== */
 
 :root {
@@ -48,14 +47,14 @@ html {
   overflow-x: hidden;
 }
 
-/* Body with Rich Fixed Multi-Point Radial Gradient Passes */
+/* 100% Seamless Continuous Body Background (No Section Seams / Hard Lines) */
 body.kaiven-site {
   background-color: #03060d;
   background-image: 
-    radial-gradient(circle at 50% 0%, rgba(0, 242, 254, 0.18) 0%, rgba(0, 40, 75, 0.12) 40%, transparent 70%),
-    radial-gradient(circle at 15% 35%, rgba(0, 80, 140, 0.2) 0%, transparent 60%),
-    radial-gradient(circle at 85% 65%, rgba(0, 242, 254, 0.14) 0%, transparent 60%),
-    radial-gradient(circle at 50% 100%, rgba(14, 27, 52, 0.8) 0%, transparent 70%);
+    radial-gradient(circle at 50% 0%, rgba(0, 242, 254, 0.18) 0%, rgba(0, 40, 75, 0.12) 35%, transparent 70%),
+    radial-gradient(circle at 10% 40%, rgba(0, 80, 140, 0.18) 0%, transparent 60%),
+    radial-gradient(circle at 90% 70%, rgba(0, 242, 254, 0.14) 0%, transparent 60%),
+    radial-gradient(circle at 50% 100%, rgba(14, 27, 52, 0.6) 0%, transparent 70%);
   background-attachment: fixed;
   color: var(--text-primary);
   line-height: 1.5;
@@ -376,32 +375,19 @@ body.kaiven-site {
   box-shadow: 0 8px 25px var(--rs-gold-glow);
 }
 
-/* Hero Carousel with Smooth Radial Ambient Glow */
+/* Hero Carousel */
 .rs-hero {
   position: relative;
   min-height: 85vh;
   display: flex;
   align-items: center;
   padding: 140px 0 80px;
-  background: transparent;
+  background: transparent !important;
   overflow: hidden;
 }
 
-.rs-hero-backdrop {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: radial-gradient(ellipse 90% 60% at 50% 30%, rgba(0, 242, 254, 0.2) 0%, rgba(0, 40, 75, 0.12) 50%, transparent 80%);
-  z-index: 1;
-}
-
-.rs-hero-gradient {
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(to bottom, rgba(3,6,13,0.1) 0%, rgba(3,6,13,0.7) 100%);
-  z-index: 2;
+.rs-hero-backdrop, .rs-hero-gradient {
+  display: none !important;
 }
 
 .rs-hero-container {
@@ -489,11 +475,11 @@ body.kaiven-site {
   box-shadow: 0 0 10px var(--rs-cyan);
 }
 
-/* Sections with Gradient Passes Between Titles */
-.rs-newswire-section, .rs-games-section, .rs-promo-banner, .rs-contact-section {
+/* Sections - Completely Transparent backgrounds with NO section edge overlays */
+.rs-newswire-section, .rs-games-section, .rs-promo-banner, .rs-newsletter-section, .rs-contact-section {
   position: relative;
   padding: 90px 0;
-  background: transparent;
+  background: transparent !important;
 }
 
 .rs-section-header {
@@ -504,20 +490,6 @@ body.kaiven-site {
   margin-bottom: 36px;
   border-bottom: 1px solid var(--rs-border);
   padding-bottom: 18px;
-}
-
-/* Soft Ambient Radial Light Pass under Section Titles */
-.rs-section-header::before, .builder-card-header::before {
-  content: '';
-  position: absolute;
-  top: -30px;
-  left: 0;
-  width: 350px;
-  height: 90px;
-  background: radial-gradient(ellipse at left, rgba(0, 242, 254, 0.18) 0%, rgba(0, 45, 80, 0.08) 50%, transparent 75%);
-  pointer-events: none;
-  z-index: 0;
-  filter: blur(15px);
 }
 
 .rs-section-title {
@@ -643,12 +615,7 @@ body.kaiven-site {
   line-height: 1.6;
 }
 
-/* Featured Games Section */
-.rs-games-section {
-  padding: 80px 0;
-  background: radial-gradient(ellipse 80% 50% at 50% 50%, rgba(7, 14, 28, 0.8) 0%, transparent 100%);
-}
-
+/* Featured Games Grid */
 .rs-games-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
@@ -754,11 +721,6 @@ body.kaiven-site {
 }
 
 /* Newsletter Section */
-.rs-newsletter-section {
-  padding: 70px 0;
-  background: radial-gradient(circle at 50% 50%, rgba(0, 242, 254, 0.08) 0%, transparent 70%);
-}
-
 .rs-newsletter-box {
   max-width: 680px;
   margin: 0 auto;
