@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Omni Seas | Character Builder & Build Calculator - Kaiven Software</title>
-  <meta name="description" content="Official Omni Seas Character Builder & Build Calculator. Plan your 250-stat build, weapon masteries, derived endurance stats, and simulate 5-card level draw packs.">
+  <meta name="description" content="Official Omni Seas Character Builder & Build Calculator. Plan your 250-stat build, weapon masteries, derived endurance stats, and select talent cards.">
   
   <!-- Favicon -->
   <link rel="icon" href="assets/images/omniseas-logo.png" type="image/png">
@@ -77,7 +77,7 @@
         </div>
         <div class="rs-hero-tag animate-slide-up"><i class="fa-solid fa-sliders text-cyan"></i> OFFICIAL BUILD CALCULATOR</div>
         <h1 class="rs-hero-title animate-slide-up delay-1" style="font-size: clamp(2.5rem, 5vw, 4rem);">OMNI SEAS CHARACTER BUILDER</h1>
-        <p class="rs-hero-desc animate-slide-up delay-2" style="font-size: 1rem;">Allocate 250 trainable stat points, balance weapon masteries, view level scaling multipliers, and simulate your 5-card level draw packs.</p>
+        <p class="rs-hero-desc animate-slide-up delay-2" style="font-size: 1rem;">Allocate stats (max 100 per stat, 250 total cap), balance weapon masteries, view level scaling multipliers, and select talent cards.</p>
       </div>
     </div>
   </section>
@@ -86,7 +86,7 @@
   <section class="rs-newswire-section" style="padding-top: 20px; padding-bottom: 80px;">
     <div class="container">
 
-      <!-- Builder Main Grid: Left Controls, Right Stats Summary -->
+      <!-- Builder Main Grid: Left Controls, Right Stats Summary & Card Selector -->
       <div class="builder-grid">
 
         <!-- Left Column: Faction & Stat Allocation Controls -->
@@ -136,41 +136,41 @@
             </div>
           </div>
 
-          <!-- Trainable Stat Points Allocation (Cap: 250) -->
+          <!-- Trainable Stat Points Allocation (Max 100 per stat, Cap: 250 Total) -->
           <div class="rs-card builder-card" style="margin-top: 24px;">
             <div class="builder-card-header" style="display: flex; justify-content: space-between; align-items: center;">
-              <h3><i class="fa-solid fa-dumbbell text-cyan"></i> 2. PRIMARY TRAINABLE STATS</h3>
+              <h3><i class="fa-solid fa-dumbbell text-cyan"></i> 2. PRIMARY TRAINABLE STATS (MAX 100 EACH)</h3>
               <span class="stat-pool-badge" id="statPoolBadge">POINTS REMAINING: <strong id="pointsRemaining" class="text-cyan">250</strong> / 250</span>
             </div>
 
-            <!-- Strength Slider -->
+            <!-- Strength Slider (0 - 100) -->
             <div class="stat-control-group">
               <div class="stat-label-bar">
                 <span class="stat-title"><i class="fa-solid fa-dumbbell text-cyan"></i> Strength</span>
-                <span class="stat-training-desc">Dumbbells & Weights</span>
+                <span class="stat-training-desc">Max 100 (Dumbbells & Weights)</span>
                 <span class="stat-val-display" id="strVal">0</span>
               </div>
-              <input type="range" id="strSlider" min="0" max="250" value="0" class="rs-slider">
+              <input type="range" id="strSlider" min="0" max="100" value="0" class="rs-slider">
             </div>
 
-            <!-- Vitality Slider -->
+            <!-- Vitality Slider (0 - 100) -->
             <div class="stat-control-group">
               <div class="stat-label-bar">
                 <span class="stat-title"><i class="fa-solid fa-heart-pulse text-cyan"></i> Vitality</span>
-                <span class="stat-training-desc">Combat & Sparring Damage</span>
+                <span class="stat-training-desc">Max 100 (Combat Damage & Sparring)</span>
                 <span class="stat-val-display" id="vitVal">0</span>
               </div>
-              <input type="range" id="vitSlider" min="0" max="250" value="0" class="rs-slider">
+              <input type="range" id="vitSlider" min="0" max="100" value="0" class="rs-slider">
             </div>
 
-            <!-- Agility Slider -->
+            <!-- Agility Slider (0 - 100) -->
             <div class="stat-control-group">
               <div class="stat-label-bar">
                 <span class="stat-title"><i class="fa-solid fa-person-running text-cyan"></i> Agility</span>
-                <span class="stat-training-desc">Foot Running & Ankle Weights</span>
+                <span class="stat-training-desc">Max 100 (Foot Running & Ankle Weights)</span>
                 <span class="stat-val-display" id="agiVal">0</span>
               </div>
-              <input type="range" id="agiSlider" min="0" max="250" value="0" class="rs-slider">
+              <input type="range" id="agiSlider" min="0" max="100" value="0" class="rs-slider">
             </div>
           </div>
 
@@ -228,7 +228,7 @@
 
         </div>
 
-        <!-- Right Column: Real-Time Character Stats & Card Draw Simulator -->
+        <!-- Right Column: Real-Time Character Stats & Card Selection Library -->
         <div class="builder-stats-col">
 
           <!-- Character Overview Card -->
@@ -269,7 +269,7 @@
             <div class="build-progress-bar-wrapper">
               <div class="build-progress-label">
                 <span>Stat Point Cap: <strong id="totalAllocated">0</strong> / 250</span>
-                <span id="levelPackCount">0 Card Packs Available</span>
+                <span id="levelPackCount">Level 0 (Max 25)</span>
               </div>
               <div class="build-progress-track">
                 <div class="build-progress-fill" id="buildProgressFill" style="width: 0%;"></div>
@@ -277,34 +277,22 @@
             </div>
           </div>
 
-          <!-- 5-Card Draw Level-Up Simulator Card -->
+          <!-- Talent Card Selector Library -->
           <div class="rs-card builder-card" style="margin-top: 24px; padding: 28px;">
-            <div class="builder-card-header" style="display: flex; justify-content: space-between; align-items: center;">
-              <h3><i class="fa-solid fa-box-open text-cyan"></i> 5-CARD DRAW SIMULATOR</h3>
-              <button class="rs-btn-primary btn-shimmer" id="drawCardsBtn" style="padding: 10px 18px; font-size: 0.8rem;">
-                <i class="fa-solid fa-clone"></i> DRAW 5 CARDS
-              </button>
-            </div>
-            <p style="color: var(--text-secondary); font-size: 0.88rem; margin-bottom: 20px;">
-              Draw 5 talent cards based on your allocated stats. Select 1 card to add to your character deck!
-            </p>
-
-            <!-- Card Draw Deck Container -->
-            <div class="cards-draw-container" id="cardsDrawContainer">
-              <div class="card-draw-placeholder">
-                <i class="fa-solid fa-cards text-cyan" style="font-size: 2.5rem; margin-bottom: 12px;"></i>
-                <p>Click <strong>"DRAW 5 CARDS"</strong> to open your level draw pack!</p>
-              </div>
+            <div class="builder-card-header" style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px;">
+              <h3><i class="fa-solid fa-layer-group text-cyan"></i> SELECT TALENT CARDS</h3>
+              <span class="stat-pool-badge">CARDS EQUIPPED: <strong id="equippedCount" class="text-cyan">0</strong></span>
             </div>
 
-            <!-- Active Equipped Deck -->
-            <div class="equipped-deck-section" style="margin-top: 24px; border-top: 1px solid var(--rs-border); padding-top: 20px;">
-              <h4 style="font-size: 0.95rem; font-weight: 800; margin-bottom: 12px; color: var(--rs-cyan);">
-                <i class="fa-solid fa-layer-group"></i> EQUIPPED TALENT CARDS (<span id="equippedCount">0</span>)
-              </h4>
-              <div class="equipped-cards-list" id="equippedCardsList">
-                <span style="color: var(--text-muted); font-size: 0.85rem;">No talent cards selected yet.</span>
-              </div>
+            <!-- Equipped Cards Tray -->
+            <div class="equipped-cards-list" id="equippedCardsList" style="margin-bottom: 20px; padding: 12px; background: var(--rs-dark-2); border-radius: 6px;">
+              <span style="color: var(--text-muted); font-size: 0.85rem;">No talent cards added yet. Click "+ Add to Build" below to select cards!</span>
+            </div>
+
+            <!-- Available Card Library Grid -->
+            <h4 style="font-size: 0.9rem; font-weight: 800; color: var(--text-secondary); margin-bottom: 12px;">AVAILABLE TALENT CARDS:</h4>
+            <div class="drawn-cards-grid" id="cardLibraryGrid">
+              <!-- Dynamically populated via builder.js -->
             </div>
           </div>
 

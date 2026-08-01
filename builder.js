@@ -1,11 +1,12 @@
 /* ==========================================================================
    OMNI SEAS CHARACTER BUILDER & BUILD CALCULATOR ENGINE
-   Based on official Plan.txt specifications
+   Max 100 per stat, 250 Total Build Point Cap, 100 Weapon Mastery Cap
    ========================================================================== */
 
 document.addEventListener('DOMContentLoaded', () => {
 
   // Maximum Build Constraints
+  const MAX_SINGLE_STAT = 100;
   const MAX_TOTAL_STATS = 250;
   const MAX_MASTERY_TOTAL = 100;
 
@@ -79,7 +80,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   let equippedCards = [];
 
-  // Card Pool Definition (Respecting Plan.txt exact rules)
+  // Card Pool Library
   const cardPool = [
     // Strength Cards
     { id: 'str_1', category: 'Strength', reqStat: 'str', reqVal: 0, title: 'Iron Lifting', desc: '+5% Heavy melee attack damage.' },
@@ -166,12 +167,12 @@ document.addEventListener('DOMContentLoaded', () => {
     const fillPercent = Math.min(100, (total / MAX_TOTAL_STATS) * 100);
     buildProgressFill.style.width = fillPercent + '%';
 
-    // Level Calculation (Plan.txt: 1 level per 10 trainable stat points, max 25)
+    // Level Calculation (1 level per 10 trainable stat points, max 25)
     const level = Math.min(25, Math.floor(total / 10));
     charLevel.textContent = level;
-    levelPackCount.textContent = `${level} Card Packs Earned`;
+    levelPackCount.textContent = `Level ${level} (Max 25)`;
 
-    // Derived Stats Calculation (Plan.txt: +1% HP/HP Regen/Stamina/Stamina Regen, +2.5% Endurance per level)
+    // Derived Stats Calculation (+1% HP/HP Regen/Stamina/Stamina Regen, +2.5% Endurance per level)
     healthBonus.textContent = `+${level}%`;
     healthRegen.textContent = `+${level}%`;
     staminaBonus.textContent = `+${level}%`;
@@ -179,12 +180,18 @@ document.addEventListener('DOMContentLoaded', () => {
     enduranceBonus.textContent = `+${(level * 2.5).toFixed(1)}%`;
 
     archetypeName.textContent = calculateBuildArchetype();
+
+    // Render Available Cards Library based on current stats
+    renderCardLibrary();
   }
 
-  // Event Listeners for Sliders with strict cap enforcement
+  // Event Listeners for Sliders with 100 max per stat & 250 total cap enforcement
   function handleStatChange(slider, statKey) {
-    const val = parseInt(slider.value, 10);
-    const oldVal = stats[statKey];
+    let val = parseInt(slider.value, 10);
+    if (val > MAX_SINGLE_STAT) {
+      val = MAX_SINGLE_STAT;
+      slider.value = val;
+    }
     stats[statKey] = val;
 
     if (getTotalTrainableStats() > MAX_TOTAL_STATS) {
@@ -196,7 +203,11 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   function handleMasteryChange(slider, masteryKey) {
-    const val = parseInt(slider.value, 10);
+    let val = parseInt(slider.value, 10);
+    if (val > MAX_SINGLE_STAT) {
+      val = MAX_SINGLE_STAT;
+      slider.value = val;
+    }
     stats[masteryKey] = val;
 
     // Enforce Mastery Total Cap (100)
@@ -261,79 +272,52 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   // --------------------------------------------------------------------------
-  // 5-Card Level Draw Simulator
+  // Talent Card Library & Deck Management
   // --------------------------------------------------------------------------
-  const drawCardsBtn = document.getElementById('drawCardsBtn');
-  const cardsDrawContainer = document.getElementById('cardsDrawContainer');
+  const cardLibraryGrid = document.getElementById('cardLibraryGrid');
   const equippedCardsList = document.getElementById('equippedCardsList');
   const equippedCount = document.getElementById('equippedCount');
 
-  drawCardsBtn?.addEventListener('click', () => {
-    // Filter cards based on stat prerequisites (Plan.txt: respects exact stat thresholds)
-    const validCards = cardPool.filter(card => {
-      const statVal = stats[card.reqStat] || 0;
-      return statVal >= card.reqVal;
-    });
+  function renderCardLibrary() {
+    if (!cardLibraryGrid) return;
+    cardLibraryGrid.innerHTML = '';
 
-    if (validCards.length < 5) {
-      cardsDrawContainer.innerHTML = `
-        <div style="text-align: center; padding: 20px; color: var(--rs-gold);">
-          <i class="fa-solid fa-triangle-exclamation" style="font-size: 2rem; margin-bottom: 10px;"></i>
-          <p>Allocate more stat points to unlock 5-card level draw pools!</p>
-        </div>
-      `;
-      return;
-    }
+    cardPool.forEach(card => {
+      const isEquipped = equippedCards.some(c => c.id === card.id);
+      const reqMet = (stats[card.reqStat] || 0) >= card.reqVal;
 
-    // Shuffle and pick 5 random cards
-    const shuffled = [...validCards].sort(() => 0.5 - Math.random());
-    const drawnFive = shuffled.slice(0, 5);
-
-    renderDrawnCards(drawnFive);
-  });
-
-  function renderDrawnCards(fiveCards) {
-    cardsDrawContainer.innerHTML = '';
-    const cardsGrid = document.createElement('div');
-    cardsGrid.className = 'drawn-cards-grid';
-
-    fiveCards.forEach(card => {
       const cardEl = document.createElement('div');
-      cardEl.className = 'drawn-card-item tilt-card';
+      cardEl.className = `drawn-card-item ${reqMet ? '' : 'locked-card'}`;
+      if (!reqMet) {
+        cardEl.style.opacity = '0.55';
+      }
 
       cardEl.innerHTML = `
-        <div class="card-category-badge">${card.category}</div>
+        <div class="card-category-badge">${card.category} (Req: ${card.reqVal} pts)</div>
         <h4 class="card-item-title">${card.title}</h4>
         <p class="card-item-desc">${card.desc}</p>
-        <button class="rs-btn-primary btn-shimmer select-card-btn" style="padding: 8px 14px; font-size: 0.75rem; width: 100%; margin-top: 12px;">
-          PICK CARD
+        <button class="rs-btn-primary btn-shimmer add-card-btn" ${!reqMet || isEquipped ? 'disabled' : ''} style="padding: 8px 14px; font-size: 0.75rem; width: 100%; margin-top: 12px; ${isEquipped ? 'background: #2ed573; color: #fff;' : ''}">
+          ${isEquipped ? 'EQUIPPED ✓' : reqMet ? '+ ADD TO BUILD' : 'REQUIRES ' + card.reqVal + ' PTS'}
         </button>
       `;
 
-      cardEl.querySelector('.select-card-btn').addEventListener('click', () => {
-        if (!equippedCards.some(c => c.id === card.id)) {
+      if (reqMet && !isEquipped) {
+        cardEl.querySelector('.add-card-btn').addEventListener('click', () => {
           equippedCards.push(card);
           renderEquippedCards();
-        }
-        cardsDrawContainer.innerHTML = `
-          <div style="text-align: center; padding: 20px; color: var(--rs-cyan);">
-            <i class="fa-solid fa-circle-check" style="font-size: 2rem; margin-bottom: 10px;"></i>
-            <p><strong>${card.title}</strong> equipped to your character deck!</p>
-          </div>
-        `;
-      });
+          renderCardLibrary();
+        });
+      }
 
-      cardsGrid.appendChild(cardEl);
+      cardLibraryGrid.appendChild(cardEl);
     });
-
-    cardsDrawContainer.appendChild(cardsGrid);
   }
 
   function renderEquippedCards() {
     equippedCount.textContent = equippedCards.length;
 
     if (equippedCards.length === 0) {
-      equippedCardsList.innerHTML = `<span style="color: var(--text-muted); font-size: 0.85rem;">No talent cards selected yet.</span>`;
+      equippedCardsList.innerHTML = `<span style="color: var(--text-muted); font-size: 0.85rem;">No talent cards added yet. Click "+ Add to Build" below to select cards!</span>`;
       return;
     }
 
@@ -343,11 +327,12 @@ document.addEventListener('DOMContentLoaded', () => {
       tag.className = 'equipped-card-tag';
       tag.innerHTML = `
         <span><strong>${c.title}</strong> (${c.category})</span>
-        <button class="remove-card-btn" data-index="${idx}"><i class="fa-solid fa-xmark"></i></button>
+        <button class="remove-card-btn" data-index="${idx}" title="Remove Card"><i class="fa-solid fa-xmark"></i></button>
       `;
       tag.querySelector('.remove-card-btn').addEventListener('click', () => {
         equippedCards.splice(idx, 1);
         renderEquippedCards();
+        renderCardLibrary();
       });
       equippedCardsList.appendChild(tag);
     });
