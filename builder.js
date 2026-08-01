@@ -46,6 +46,9 @@ document.addEventListener('DOMContentLoaded', () => {
   const staminaRegen = document.getElementById('staminaRegen');
   const enduranceBonus = document.getElementById('enduranceBonus');
 
+  const activeCardBuffsList = document.getElementById('activeCardBuffsList');
+  const buffsCountBadge = document.getElementById('buffsCountBadge');
+
   // Factions Selection
   const factionOptions = document.querySelectorAll('.faction-option');
   let currentFaction = 'Pirates';
@@ -425,8 +428,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
     if (archetypeName) archetypeName.textContent = calculateBuildArchetype();
 
-    // Render Cards Library
+    // Render Cards Library & Active Buffs Box
     renderCardLibrary();
+    renderActiveCardBuffs();
   }
 
   // Event Listeners for Sliders with 100 max per stat & 250 total cap enforcement
@@ -529,6 +533,42 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   // --------------------------------------------------------------------------
+  // Render Active Card Buffs List Under Top Derived Stats
+  // --------------------------------------------------------------------------
+  function renderActiveCardBuffs() {
+    if (!activeCardBuffsList) return;
+
+    if (buffsCountBadge) {
+      buffsCountBadge.textContent = `${equippedCards.length} BUFFS ACTIVE`;
+    }
+
+    if (equippedCards.length === 0) {
+      activeCardBuffsList.innerHTML = `<span style="color: var(--text-muted); font-size: 0.8rem;">No active card buffs. Add cards below to activate passive bonuses!</span>`;
+      return;
+    }
+
+    activeCardBuffsList.innerHTML = '';
+    equippedCards.forEach(c => {
+      const item = document.createElement('div');
+      item.style.fontSize = '0.78rem';
+      item.style.lineHeight = '1.35';
+      item.style.display = 'flex';
+      item.style.justifyContent = 'space-between';
+      item.style.alignItems = 'center';
+      item.style.padding = '4px 8px';
+      item.style.background = 'rgba(0, 242, 254, 0.06)';
+      item.style.borderRadius = '4px';
+      item.style.borderLeft = '2px solid var(--rs-cyan)';
+
+      item.innerHTML = `
+        <span><strong style="color: #fff;">${c.name}:</strong> <span style="color: var(--text-secondary);">${c.effect}</span></span>
+        <span style="font-size: 0.65rem; color: var(--rs-gold); font-weight: 800; margin-left: 8px;">${c.category}</span>
+      `;
+      activeCardBuffsList.appendChild(item);
+    });
+  }
+
+  // --------------------------------------------------------------------------
   // Card Library Renderer (Enforcing Max 30 Pick Limit)
   // --------------------------------------------------------------------------
   const cardLibraryGrid = document.getElementById('cardLibraryGrid');
@@ -574,6 +614,7 @@ document.addEventListener('DOMContentLoaded', () => {
             equippedCards.push(card);
             renderEquippedCards();
             renderCardLibrary();
+            renderActiveCardBuffs();
           }
         });
       }
@@ -602,6 +643,7 @@ document.addEventListener('DOMContentLoaded', () => {
         equippedCards.splice(idx, 1);
         renderEquippedCards();
         renderCardLibrary();
+        renderActiveCardBuffs();
       });
       equippedCardsList.appendChild(tag);
     });
