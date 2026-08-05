@@ -129,40 +129,45 @@
               </label>
             </div>
 
-            <!-- Race & Clan Dropdown Selectors -->
+            <!-- Race & Clan Dropdown Selectors (29 Races, 21 Clans) -->
             <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 20px;">
               <div>
-                <label style="font-size: 0.8rem; font-weight: 800; color: var(--rs-cyan); display: block; margin-bottom: 6px;"><i class="fa-solid fa-dna"></i> SELECT RACE</label>
+                <label style="font-size: 0.8rem; font-weight: 800; color: var(--rs-cyan); display: block; margin-bottom: 6px;"><i class="fa-solid fa-dna"></i> SELECT RACE (29)</label>
                 <select id="raceSelect" class="rs-select">
                   <option value="Human">Human (+5% Training EXP)</option>
-                  <option value="Skilled Human">Skilled Human (+10% EXP, +5% Stamina Regen)</option>
+                  <option value="Skilled Human">Skilled Human (+10% EXP, +5% Stamina)</option>
                   <option value="Peak Human">Peak Human (+10% Speed, +10% EXP)</option>
                   <option value="Superhuman">Superhuman (+20% Phys Dmg, +15% HP)</option>
                   <option value="Viltrumite">Viltrumite (+20% Phys Dmg, +25% HP)</option>
                   <option value="Hollow">Hollow (+15% Physical Damage)</option>
-                  <option value="Fullbringer">Fullbringer (+10% Speed, +10% Weapon Dmg)</option>
-                  <option value="Demon">Demon (+25% HP Regen, -15% Defense)</option>
+                  <option value="Fullbringer">Fullbringer (+10% Speed, +10% Wpn Dmg)</option>
+                  <option value="Demon">Demon (+25% HP Regen, -15% Def)</option>
                   <option value="Ghoul">Ghoul (+15% Physical Damage)</option>
-                  <option value="Cursed Spirit">Cursed Spirit (+15% Def, +20% Magic Dmg)</option>
-                  <option value="Shinigami">Shinigami (+15% Weapon Dmg, +10% Posture)</option>
+                  <option value="Cursed Spirit">Cursed Spirit (+15% Def, +20% Magic)</option>
+                  <option value="Shinigami">Shinigami (+15% Wpn Dmg, +10% Posture)</option>
                   <option value="Arrancar">Arrancar (+20% Def, +15% Magic Dmg)</option>
                   <option value="Quincy">Quincy (+15% Weapon Damage)</option>
                   <option value="Death Painting Womb">Death Painting Womb (+20% HP Regen)</option>
-                  <option value="Half-Ghoul">Half-Ghoul (-20% Stamina Drain, +15% Phys)</option>
+                  <option value="Half-Ghoul">Half-Ghoul (-20% Drain, +15% Phys)</option>
                   <option value="Devil">Devil (+15% Total Damage)</option>
                   <option value="Fiend">Fiend (+15% Defense, +10% HP Regen)</option>
-                  <option value="Hybrid">Hybrid (+15% Total Damage, +10% HP Regen)</option>
+                  <option value="Hybrid">Hybrid (+15% Total Dmg, +10% HP Regen)</option>
                   <option value="Chimera Ant">Chimera Ant (+10% Total Damage)</option>
                   <option value="Nen User">Nen User (+20% Defense, +15% Skill Dmg)</option>
                   <option value="Saiyan">Saiyan (+15% Total Dmg below 30% HP)</option>
-                  <option value="Majin">Majin (+30% HP Regen, Status Immunity)</option>
+                  <option value="Majin">Majin (+30% HP Regen, Immunity)</option>
                   <option value="Angel">Angel (+10% Evasion, +15% Magic Dmg)</option>
                   <option value="God of Destruction">God of Destruction (+35% Total Dmg)</option>
+                  <option value="Ninja">Ninja (+10% Speed, +10% Skill Dmg)</option>
+                  <option value="Fish-Men">Fish-Men (+15% Phys Dmg, +10% Style)</option>
+                  <option value="Mink">Mink (+15% Elem Dmg, +10% Speed)</option>
+                  <option value="Lunarian">Lunarian (+18% Defense, +15% Elem)</option>
+                  <option value="Skypiean">Skypiean (+15% Speed, +4% Evasion)</option>
                 </select>
               </div>
 
               <div>
-                <label style="font-size: 0.8rem; font-weight: 800; color: var(--rs-gold); display: block; margin-bottom: 6px;"><i class="fa-solid fa-shield-cat"></i> SELECT CLAN</label>
+                <label style="font-size: 0.8rem; font-weight: 800; color: var(--rs-gold); display: block; margin-bottom: 6px;"><i class="fa-solid fa-shield-cat"></i> SELECT CLAN (21)</label>
                 <select id="clanSelect" class="rs-select">
                   <option value="None">None (No Clan Perk)</option>
                   <option value="Kamado">Kamado (+3% HP Regen, +5% Stamina)</option>
@@ -177,6 +182,15 @@
                   <option value="Dark Empire">Dark Empire (+15% Total Dmg, +12% Debuff)</option>
                   <option value="Otsutsuki">Otsutsuki (+18% Elem Dmg, +10% Stamina)</option>
                   <option value="Viltrum Empire">Viltrum Empire (+20% Phys Dmg, +15% End)</option>
+                  <option value="Espada">Espada (+15% Magic Dmg, +10% Def)</option>
+                  <option value="Gotei 13">Gotei 13 (+15% Wpn Dmg, +10% CDR)</option>
+                  <option value="Royal Guard">Royal Guard (+20% Wpn Dmg, +15% Posture)</option>
+                  <option value="Sternritter">Sternritter (+15% Wpn Dmg, -12% CDR)</option>
+                  <option value="Schutzstaffel">Schutzstaffel (+20% Wpn, +15% Skill)</option>
+                  <option value="Akatsuki">Akatsuki (+15% Skill Dmg, +10% Total)</option>
+                  <option value="Sannin">Sannin (+15% HP Regen, +12% Phys Dmg)</option>
+                  <option value="Warlord">Warlord (+15% Def, +12% Total Dmg)</option>
+                  <option value="Emperor">Emperor (+20% Total Dmg, +15% HP)</option>
                 </select>
               </div>
             </div>
@@ -355,7 +369,7 @@
             </div>
           </div>
 
-          <!-- Talent Card Library Selector -->
+          <!-- Talent Card Library Selector (263 Cards) -->
           <div class="rs-card builder-card" style="margin-top: 24px; padding: 28px;">
             <div class="builder-card-header" style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px;">
               <h3><i class="fa-solid fa-layer-group text-cyan"></i> CARDS</h3>

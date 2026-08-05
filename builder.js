@@ -1,7 +1,6 @@
 /* ==========================================================================
    OMNI SEAS CHARACTER BUILDER ENGINE
-   Synchronized with Cards.json, Races_and_clans.json, & Stats.json
-   Format: Current Value | Cap (e.g. +0% | +50%)
+   263 Talent Cards, 29 Races, 21 Clans, & 26 Game Stats Calculation
    ========================================================================== */
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -67,6 +66,11 @@ document.addEventListener('DOMContentLoaded', () => {
   {"type": "Race", "name": "Majin", "stat_bonus": "+30% Health Regen, Status Effect Immunity"},
   {"type": "Race", "name": "Angel", "stat_bonus": "+10% Evasion, +15% Magical Damage"},
   {"type": "Race", "name": "God of Destruction", "stat_bonus": "+35% Total Damage"},
+  {"type": "Race", "name": "Ninja", "stat_bonus": "+10% Movement Speed, +5% Skill Damage"},
+  {"type": "Race", "name": "Fish-Men", "stat_bonus": "+20% Physical Damage, +15% Fighting Style Dmg, +10% Max HP"},
+  {"type": "Race", "name": "Mink", "stat_bonus": "+15% Elemental Damage, +10% Movement Speed, +10% Stamina Regen"},
+  {"type": "Race", "name": "Lunarian", "stat_bonus": "+20% Defense, +15% Elemental Damage, +10% Health Regen"},
+  {"type": "Race", "name": "Skypiean", "stat_bonus": "+10% Movement Speed, +5% Evasion, +10% Max Stamina"},
   {"type": "Clan", "name": "Kamado", "stat_bonus": "+3% Health Regen, +5% Max Stamina"},
   {"type": "Clan", "name": "Hyuga", "stat_bonus": "+3% Max HP, +5% Fighting Style Dmg"},
   {"type": "Clan", "name": "Uzumaki", "stat_bonus": "+5% Max HP, +3% Endurance"},
@@ -78,7 +82,16 @@ document.addEventListener('DOMContentLoaded', () => {
   {"type": "Clan", "name": "Core Area Warriors", "stat_bonus": "+20% Ultimate Skill Dmg, +15% Max Posture"},
   {"type": "Clan", "name": "Dark Empire", "stat_bonus": "+15% Total Damage, +12% Debuff Duration, -12% Cooldown Reduction"},
   {"type": "Clan", "name": "Otsutsuki", "stat_bonus": "+18% Elemental Damage, +10% Max Stamina"},
-  {"type": "Clan", "name": "Viltrum Empire", "stat_bonus": "+20% Physical Damage, +15% Endurance, +3% Evasion"}
+  {"type": "Clan", "name": "Viltrum Empire", "stat_bonus": "+20% Physical Damage, +15% Endurance, +3% Evasion"},
+  {"type": "Clan", "name": "Espada", "stat_bonus": "+12% Physical Damage, +8% Magical Damage"},
+  {"type": "Clan", "name": "Gotei 13", "stat_bonus": "+10% Weapon Damage, +5% Defense"},
+  {"type": "Clan", "name": "Royal Guard", "stat_bonus": "+15% Max Posture, +10% Total Damage"},
+  {"type": "Clan", "name": "Sternritter", "stat_bonus": "+10% Weapon Damage, -8% Cooldown Reduction"},
+  {"type": "Clan", "name": "Schutzstaffel", "stat_bonus": "+15% Defense, +10% Skill Damage"},
+  {"type": "Clan", "name": "Akatsuki", "stat_bonus": "+10% Skill Damage, +8% Total Damage"},
+  {"type": "Clan", "name": "Sannin", "stat_bonus": "+10% Health Regen, +8% Physical Damage"},
+  {"type": "Clan", "name": "Warlord", "stat_bonus": "+12% Total Damage, +10% Defense"},
+  {"type": "Clan", "name": "Emperor", "stat_bonus": "+20% Total Damage, +15% Max HP, +10% Defense"}
 ];
   const cardPool = [
   {"name":"Heavy Hauler","req":"0 STR","category":"Strength","effect":"+3% Physical Damage, +2% Weapon Damage"},
@@ -313,7 +326,37 @@ document.addEventListener('DOMContentLoaded', () => {
   {"name":"Apex Biological Predator","req":"80 STR, 50 AGI, Ghoul Race, Hanma Clan","category":"Combo Exclusive","effect":"+20% Physical Damage, +10% Stun Resistance, +10% Movement Speed"},
   {"name":"Untouchable Transcendence","req":"80 AGI, 60 VIT, Angel Race, Gojo Clan","category":"Combo Exclusive","effect":"+8% Evasion, +15% Magical Damage, -10% Cooldown Reduction"},
   {"name":"Abyssal Calamity","req":"70 VIT, 60 STR, Cursed Spirit Race, Dark Empire Clan","category":"Combo Exclusive","effect":"+15% Total Damage, +15% Magical Damage, +12% Debuff Duration"},
-  {"name":"Celestial Aura Mastery","req":"70 AGI, 70 VIT, Nen User Race, Otsutsuki Clan","category":"Combo Exclusive","effect":"+18% Elemental Damage, +15% Defense, +10% Skill Damage"}
+  {"name":"Celestial Aura Mastery","req":"70 AGI, 70 VIT, Nen User Race, Otsutsuki Clan","category":"Combo Exclusive","effect":"+18% Elemental Damage, +15% Defense, +10% Skill Damage"},
+  {"name":"Shadow Destruction Overlord","req":"80 STR, 60 VIT, God of Destruction Race, Dark Empire Clan","category":"Combo Exclusive","effect":"+25% Total Damage, +20% Ultimate Skill Dmg, -10% Cooldown Reduction"},
+  {"name":"Celestial Divine Transcendence","req":"80 AGI, 60 VIT, Angel Race, Otsutsuki Clan","category":"Combo Exclusive","effect":"+20% Elemental Damage, +8% Evasion, +15% Magical Damage"},
+  {"name":"Demonic Ogre Resilience","req":"80 STR, 50 VIT, Devil Race, Hanma Clan","category":"Combo Exclusive","effect":"+20% Physical Damage, +12% Stun Resistance, +10% Total Damage"},
+  {"name":"Cero Metamorphic Release","req":"70 VIT, 50 STR, Arrancar Race, Espada Faction","category":"Combo Exclusive","effect":"+20% Defense, +15% Magical Damage, +10% Physical Damage"},
+  {"name":"Gotei Captain Ascension","req":"70 STR, 50 MED, Shinigami Race, Gotei 13 Faction","category":"Combo Exclusive","effect":"+15% Weapon Damage, +12% Defense, -10% Cooldown Reduction"},
+  {"name":"Zero Division Sovereign","req":"80 STR, 60 AGI, Shinigami Race, Royal Guard Faction","category":"Combo Exclusive","effect":"+20% Weapon Damage, +15% Max Posture, +10% Total Damage"},
+  {"name":"Vollständig Schrift Resonance","req":"70 GUN, 50 AGI, Quincy Race, Sternritter Faction","category":"Combo Exclusive","effect":"+15% Weapon Damage, -12% Cooldown Reduction, +10% Physical Damage"},
+  {"name":"Schutzstaffel Sacred Guard","req":"80 AGI, 60 GUN, Quincy Race, Schutzstaffel Faction","category":"Combo Exclusive","effect":"+20% Weapon Damage, +15% Skill Damage, +6% Evasion"},
+  {"name":"Crimson Cloud Ambush","req":"70 AGI, 50 STR, Ninja Class, Akatsuki Faction","category":"Combo Exclusive","effect":"+15% Skill Damage, +10% Total Damage, -10% Cooldown Reduction"},
+  {"name":"Sage Sannin Mastery","req":"70 VIT, 60 STR, Ninja Class, Sannin Faction","category":"Combo Exclusive","effect":"+15% Health Regen, +12% Physical Damage, +10% Defense"},
+  {"name":"Visual Foresight Mastery","req":"80 AGI, 60 STR, Ninja Class, Uchiha Clan","category":"Combo Exclusive","effect":"-15% Cooldown Reduction, +15% Skill Damage, +4% Evasion"},
+  {"name":"Sealing Force Vitality","req":"80 VIT, 50 STR, Ninja Class, Uzumaki Clan","category":"Combo Exclusive","effect":"+18% Max HP, +15% Max Stamina, +10% Endurance"},
+  {"name":"Eight Trigrams Precision","req":"70 STR, 60 AGI, Ninja Class, Hyuga Clan","category":"Combo Exclusive","effect":"+15% Fighting Style Dmg, +10% Max Posture, +8% Physical Damage"},
+  {"name":"Ancestral Truth Core","req":"80 VIT, 70 AGI, Ninja Class, Otsutsuki Clan","category":"Combo Exclusive","effect":"+20% Elemental Damage, +15% Max Stamina, +12% Skill Damage"},
+  {"name":"Seven Seas Tyrant","req":"80 STR, 60 VIT, Pirate Faction, Warlord Clan","category":"Combo Exclusive","effect":"+20% Total Damage, +12% Defense, +10% Max HP"},
+  {"name":"Sovereign of the High Seas","req":"80 STR, 70 VIT, Pirate Faction, Emperor Clan","category":"Combo Exclusive","effect":"+25% Total Damage, +18% Max HP, +15% Defense"},
+  {"name":"Corsair Warlord","req":"70 AGI, 50 STR, Pirate Faction, Warlord Clan","category":"Combo Exclusive","effect":"+15% Movement Speed, +12% Weapon Damage, +10% Total Damage"},
+  {"name":"Imperial Marauder","req":"75 STR, 50 AGI, Pirate Faction, Emperor Clan","category":"Combo Exclusive","effect":"+20% Physical Damage, +15% Total Damage, +10% Movement Speed"},
+  {"name":"Warlord Bastion","req":"70 VIT, 50 STR, Warlord Clan","category":"Clan Exclusive","effect":"+15% Defense, +12% Total Damage, +10% Max Posture"},
+  {"name":"Emperor's Presence","req":"80 STR, 60 VIT, Emperor Clan","category":"Clan Exclusive","effect":"+20% Total Damage, +15% Max HP, +10% Endurance"},
+  {"name":"Ironclad Warlord","req":"80 VIT, 50 STR, Superhuman Race, Warlord Clan","category":"Combo Exclusive","effect":"+18% Max HP, +15% Defense, +10% Total Damage"},
+  {"name":"Conquering Sovereign","req":"80 STR, 60 VIT, Viltrumite Race, Emperor Clan","category":"Combo Exclusive","effect":"+22% Physical Damage, +18% Total Damage, +12% Endurance"},
+  {"name":"Ocean Overlord Marauder","req":"70 STR, 50 VIT, Fish-Men Race, Pirate Faction","category":"Combo Exclusive","effect":"+18% Physical Damage, +12% Fighting Style Dmg, +10% Max HP"},
+  {"name":"Tidal Corsair Strike","req":"60 STR, 40 AGI, Fish-Men Race, Pirate Faction","category":"Combo Exclusive","effect":"+15% Fighting Style Dmg, +10% Movement Speed, +8% Total Damage"},
+  {"name":"Sinking Electro Raider","req":"70 AGI, 50 STR, Mink Race, Pirate Faction","category":"Combo Exclusive","effect":"+15% Elemental Damage, +12% Movement Speed, +10% Stamina Regen"},
+  {"name":"Sunsoul Wild Marauder","req":"60 AGI, 40 VIT, Mink Race, Pirate Faction","category":"Combo Exclusive","effect":"+12% Elemental Damage, +10% Movement Speed, +8% Total Damage"},
+  {"name":"Ignited Calamity Corsair","req":"80 VIT, 60 STR, Lunarian Race, Pirate Faction","category":"Combo Exclusive","effect":"+18% Defense, +15% Elemental Damage, +10% Total Damage"},
+  {"name":"Flame-Winged Dreadnought","req":"70 STR, 50 VIT, Lunarian Race, Pirate Faction","category":"Combo Exclusive","effect":"+15% Elemental Damage, +12% Physical Damage, +10% Health Regen"},
+  {"name":"Skybound Buccaneer","req":"70 AGI, 40 STR, Skypiean Race, Pirate Faction","category":"Combo Exclusive","effect":"+15% Movement Speed, +4% Evasion, +10% Total Damage"},
+  {"name":"Dial-Engine Corsair","req":"60 AGI, 50 GUN, Skypiean Race, Pirate Faction","category":"Combo Exclusive","effect":"+12% Weapon Damage, +10% Movement Speed, -8% Cooldown Reduction"}
 ];
 
   // DOM Elements
@@ -394,7 +437,7 @@ document.addEventListener('DOMContentLoaded', () => {
   let equippedCards = [];
   let selectedCategory = 'ALL';
 
-  // Parse Requirement String
+  // Smart Requirement Parser (Handles Factions, Races, Clans, Classes, and Masteries)
   function meetsRequirement(reqStr) {
     if (!reqStr || reqStr === '0') return true;
 
@@ -403,38 +446,39 @@ document.addEventListener('DOMContentLoaded', () => {
       part = part.trim();
 
       // Faction check
-      if (part.includes('Marine Faction')) {
-        if (currentFaction !== 'Marines') return false;
-        continue;
-      }
-      if (part.includes('Pirate Faction')) {
-        if (currentFaction !== 'Pirates') return false;
-        continue;
-      }
-      if (part.includes('Revolutionary Army Faction')) {
-        if (currentFaction !== 'Revolutionaries') return false;
-        continue;
-      }
-      if (part.includes('Adventurer Faction')) {
-        if (currentFaction !== 'Adventurers') return false;
+      if (part.endsWith(' Faction')) {
+        const fac = part.replace(' Faction', '').trim();
+        if (fac === 'Marine' && currentFaction !== 'Marines') return false;
+        if (fac === 'Pirate' && currentFaction !== 'Pirates') return false;
+        if (fac === 'Revolutionary Army' && currentFaction !== 'Revolutionaries') return false;
+        if (fac === 'Adventurer' && currentFaction !== 'Adventurers') return false;
+        if (['Espada', 'Gotei 13', 'Royal Guard', 'Sternritter', 'Schutzstaffel', 'Akatsuki', 'Sannin', 'Warlord', 'Emperor'].includes(fac)) {
+          if (currentClan !== fac && currentFaction !== fac) return false;
+        }
         continue;
       }
 
-      // Race check
-      if (part.includes('Race')) {
-        const reqRace = part.replace('Race', '').trim();
+      // Class / Race check
+      if (part.endsWith(' Class')) {
+        const cls = part.replace(' Class', '').trim();
+        if (currentRace !== cls) return false;
+        continue;
+      }
+
+      if (part.endsWith(' Race')) {
+        const reqRace = part.replace(' Race', '').trim();
         if (currentRace !== reqRace) return false;
         continue;
       }
 
       // Clan check
-      if (part.includes('Clan')) {
-        const reqClan = part.replace('Clan', '').trim();
+      if (part.endsWith(' Clan')) {
+        const reqClan = part.replace(' Clan', '').trim();
         if (currentClan !== reqClan) return false;
         continue;
       }
 
-      // Stat requirement check
+      // Stat requirement check (e.g. 80 STR, 60 VIT, 50 LHT, 40 MED, 30 HVY, 20 GUN)
       const match = part.match(/^(\d+)\s+(.+)$/);
       if (!match) continue;
 
@@ -516,27 +560,27 @@ document.addEventListener('DOMContentLoaded', () => {
         const numMatch = text.match(/([+-]?\d+(?:\.\d+)?)%/);
         const val = numMatch ? parseFloat(numMatch[1]) : 0;
 
-        if (text.includes('Physical Damage') || text.includes('Phys Dmg')) physDmg += val;
-        else if (text.includes('Magical Damage') || text.includes('Magic Dmg')) magicDmg += val;
-        else if (text.includes('Movement Speed') || text.includes('Sprint Speed')) moveSpeed += val;
+        if (text.includes('Physical Damage') || text.includes('Phys Dmg') || text.includes('Phys')) physDmg += val;
+        else if (text.includes('Magical Damage') || text.includes('Magic Dmg') || text.includes('Magic')) magicDmg += val;
+        else if (text.includes('Movement Speed') || text.includes('Sprint Speed') || text.includes('Speed')) moveSpeed += val;
         else if (text.includes('Cooldown Reduction') || text.includes('CDR')) cdr += Math.abs(val);
-        else if (text.includes('Skill Damage') || text.includes('Skill Dmg')) skillDmg += val;
-        else if (text.includes('Weapon Damage') || text.includes('Weapon Dmg') || text.includes('Heavy Weapon Damage') || text.includes('Light Weapon Damage')) wpnDmg += val;
+        else if (text.includes('Skill Damage') || text.includes('Skill Dmg') || text.includes('Skill')) skillDmg += val;
+        else if (text.includes('Weapon Damage') || text.includes('Weapon Dmg') || text.includes('Wpn Dmg') || text.includes('Heavy Weapon Damage') || text.includes('Light Weapon Damage')) wpnDmg += val;
         else if (text.includes('Stun Resistance') || text.includes('Stun Res')) stunRes += val;
         else if (text.includes('Total Damage') || text.includes('Total Dmg')) totalDmg += val;
         else if (text.includes('Health Regen') || text.includes('HP Regen')) hpRegen += val;
-        else if (text.includes('Debuff Duration')) debuffDuration += Math.abs(val);
-        else if (text.includes('Reduced Stamina Drain') || text.includes('Stamina Drain') || text.includes('Stamina Cost')) staminaDrain += Math.abs(val);
+        else if (text.includes('Debuff Duration') || text.includes('Debuff')) debuffDuration += Math.abs(val);
+        else if (text.includes('Reduced Stamina Drain') || text.includes('Stamina Drain') || text.includes('Stamina Cost') || text.includes('Drain')) staminaDrain += Math.abs(val);
         else if (text.includes('Defense') || text.includes('Def')) defense += val;
-        else if (text.includes('Max HP')) maxHp += val;
-        else if (text.includes('Max Stamina')) maxStamina += val;
-        else if (text.includes('Max Posture') || text.includes('Posture Cap')) maxPosture += val;
+        else if (text.includes('Max HP') || text.includes('HP')) maxHp += val;
+        else if (text.includes('Max Stamina') || text.includes('Stamina')) staminaRegen += val;
+        else if (text.includes('Max Posture') || text.includes('Posture Cap') || text.includes('Posture')) maxPosture += val;
         else if (text.includes('Stamina Regen')) staminaRegen += val;
-        else if (text.includes('Fighting Style Dmg') || text.includes('Fighting Style Damage') || text.includes('Style Dmg')) styleDmg += val;
+        else if (text.includes('Fighting Style Dmg') || text.includes('Fighting Style Damage') || text.includes('Style Dmg') || text.includes('Style')) styleDmg += val;
         else if (text.includes('Evasion') || text.includes('Dodge Distance')) evasion += val;
         else if (text.includes('Ultimate Skill Dmg') || text.includes('Ultimate Skill Damage')) ultDmg += val;
-        else if (text.includes('Elemental Damage') || text.includes('Elem Dmg')) elemDmg += val;
-        else if (text.includes('Endurance')) endurance += val;
+        else if (text.includes('Elemental Damage') || text.includes('Elem Dmg') || text.includes('Elem')) elemDmg += val;
+        else if (text.includes('Endurance') || text.includes('End')) endurance += val;
       });
     };
 
