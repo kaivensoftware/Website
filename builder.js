@@ -1,6 +1,6 @@
 /* ==========================================================================
    OMNI SEAS CHARACTER BUILDER & BUILD CALCULATOR ENGINE
-   Max 30 Cards Pick Limit, Clean Titles, 250 Total Stat Cap, 100 Mastery Cap
+   233 Talent Cards, Race & Clan Selectors, 26 Comprehensive Game Stats
    ========================================================================== */
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -38,16 +38,28 @@ document.addEventListener('DOMContentLoaded', () => {
   const charLevel = document.getElementById('charLevel');
   const archetypeName = document.getElementById('archetypeName');
   const factionBadge = document.getElementById('factionBadge');
+  const raceBadge = document.getElementById('raceBadge');
+  const clanBadge = document.getElementById('clanBadge');
   const levelPackCount = document.getElementById('levelPackCount');
 
-  const healthBonus = document.getElementById('healthBonus');
-  const healthRegen = document.getElementById('healthRegen');
-  const staminaBonus = document.getElementById('staminaBonus');
-  const staminaRegen = document.getElementById('staminaRegen');
-  const enduranceBonus = document.getElementById('enduranceBonus');
+  // Race and Clan Selectors
+  const raceSelect = document.getElementById('raceSelect');
+  const clanSelect = document.getElementById('clanSelect');
 
-  const activeCardBuffsList = document.getElementById('activeCardBuffsList');
-  const buffsCountBadge = document.getElementById('buffsCountBadge');
+  let currentRace = 'Human';
+  let currentClan = 'None';
+
+  raceSelect?.addEventListener('change', (e) => {
+    currentRace = e.target.value;
+    if (raceBadge) raceBadge.textContent = currentRace.toUpperCase();
+    updateUI();
+  });
+
+  clanSelect?.addEventListener('change', (e) => {
+    currentClan = e.target.value;
+    if (clanBadge) clanBadge.textContent = currentClan.toUpperCase();
+    updateUI();
+  });
 
   // Factions Selection
   const factionOptions = document.querySelectorAll('.faction-option');
@@ -106,8 +118,17 @@ document.addEventListener('DOMContentLoaded', () => {
         continue;
       }
 
-      // Race & Clan requirements check
-      if (part.includes('Race') || part.includes('Clan')) {
+      // Race check
+      if (part.includes('Race')) {
+        const reqRace = part.replace('Race', '').trim();
+        if (currentRace !== reqRace) return false;
+        continue;
+      }
+
+      // Clan check
+      if (part.includes('Clan')) {
+        const reqClan = part.replace('Clan', '').trim();
+        if (currentClan !== reqClan) return false;
         continue;
       }
 
@@ -155,6 +176,95 @@ document.addEventListener('DOMContentLoaded', () => {
     return 'BALANCED MARAUDER';
   }
 
+  // Calculate 26 Game Stats from stats, level, and card effects
+  function calculateGameStats() {
+    const total = getTotalTrainableStats();
+    const level = Math.min(25, Math.floor(total / 10));
+
+    // Base Level Derived Stats
+    let maxHp = level;
+    let hpRegen = level;
+    let maxStamina = level;
+    let staminaRegen = level;
+    let endurance = level * 2.5;
+
+    let physDmg = 0;
+    let magicDmg = 0;
+    let moveSpeed = 0;
+    let cdr = 0;
+    let skillDmg = 0;
+    let wpnDmg = 0;
+    let stunRes = 0;
+    let totalDmg = 0;
+    let debuffDuration = 0;
+    let staminaDrain = 0;
+    let defense = 0;
+    let maxPosture = 0;
+    let styleDmg = 0;
+    let evasion = 0;
+    let ultDmg = 0;
+    let elemDmg = 0;
+
+    // Parse Card Effects
+    equippedCards.forEach(c => {
+      const parts = c.effect.split(',');
+      parts.forEach(p => {
+        const text = p.trim();
+        const numMatch = text.match(/([+-]?\d+(?:\.\d+)?)%/);
+        const val = numMatch ? parseFloat(numMatch[1]) : 0;
+
+        if (text.includes('Physical Damage')) physDmg += val;
+        else if (text.includes('Magical Damage')) magicDmg += val;
+        else if (text.includes('Movement Speed') || text.includes('Sprint Speed')) moveSpeed += val;
+        else if (text.includes('Skill Cooldown Reduction') || text.includes('Cooldown Reduction')) cdr += Math.abs(val);
+        else if (text.includes('Skill Damage')) skillDmg += val;
+        else if (text.includes('Weapon Damage') || text.includes('Heavy Weapon Damage') || text.includes('Light Weapon Damage')) wpnDmg += val;
+        else if (text.includes('Stun Resistance')) stunRes += val;
+        else if (text.includes('Total Damage')) totalDmg += val;
+        else if (text.includes('Health Regen') || text.includes('HP Regen')) hpRegen += val;
+        else if (text.includes('Debuff Duration')) debuffDuration += Math.abs(val);
+        else if (text.includes('Reduced Stamina Drain') || text.includes('Stamina Cost')) staminaDrain += Math.abs(val);
+        else if (text.includes('Defense')) defense += val;
+        else if (text.includes('Max HP')) maxHp += val;
+        else if (text.includes('Max Stamina')) maxStamina += val;
+        else if (text.includes('Max Posture') || text.includes('Posture Cap')) maxPosture += val;
+        else if (text.includes('Stamina Regen')) staminaRegen += val;
+        else if (text.includes('Fighting Style Damage')) styleDmg += val;
+        else if (text.includes('Evasion') || text.includes('Dodge Distance')) evasion += val;
+        else if (text.includes('Ultimate Skill Damage')) ultDmg += val;
+        else if (text.includes('Elemental Damage')) elemDmg += val;
+        else if (text.includes('Endurance')) endurance += val;
+      });
+    });
+
+    return {
+      str: stats.str,
+      agi: stats.agi,
+      vit: stats.vit,
+      physDmg,
+      magicDmg,
+      moveSpeed,
+      cdr,
+      skillDmg,
+      wpnDmg,
+      stunRes,
+      totalDmg,
+      hpRegen,
+      debuffDuration,
+      staminaDrain,
+      defense,
+      maxHp,
+      maxStamina,
+      maxPosture,
+      staminaRegen,
+      styleDmg,
+      evasion,
+      ultDmg,
+      elemDmg,
+      endurance
+    };
+  }
+
   function updateUI() {
     const total = getTotalTrainableStats();
     const masteryTotal = getWeaponMasterySum();
@@ -184,12 +294,44 @@ document.addEventListener('DOMContentLoaded', () => {
     if (charLevel) charLevel.textContent = level;
     if (levelPackCount) levelPackCount.textContent = `Level ${level} (Max 25)`;
 
-    // Derived Stats Calculation (+1% HP/HP Regen/Stamina/Stamina Regen, +2.5% Endurance per level)
-    if (healthBonus) healthBonus.textContent = `+${level}%`;
-    if (healthRegen) healthRegen.textContent = `+${level}%`;
-    if (staminaBonus) staminaBonus.textContent = `+${level}%`;
-    if (staminaRegen) staminaRegen.textContent = `+${level}%`;
-    if (enduranceBonus) enduranceBonus.textContent = `+${(level * 2.5).toFixed(1)}%`;
+    // Calculate & Display 26 Game Stats
+    const gStats = calculateGameStats();
+
+    const setStatText = (id, val, prefix = '+') => {
+      const el = document.getElementById(id);
+      if (el) el.textContent = typeof val === 'number' ? `${prefix}${val.toFixed(0)}%` : val;
+    };
+
+    const statStrEl = document.getElementById('statStr');
+    if (statStrEl) statStrEl.textContent = gStats.str;
+
+    const statAgiEl = document.getElementById('statAgi');
+    if (statAgiEl) statAgiEl.textContent = gStats.agi;
+
+    const statVitEl = document.getElementById('statVit');
+    if (statVitEl) statVitEl.textContent = gStats.vit;
+
+    setStatText('statMaxHp', gStats.maxHp);
+    setStatText('statMaxStamina', gStats.maxStamina);
+    setStatText('statMaxPosture', gStats.maxPosture);
+    setStatText('statHpRegen', gStats.hpRegen);
+    setStatText('statStaminaRegen', gStats.staminaRegen);
+    setStatText('statEndurance', gStats.endurance);
+    setStatText('statPhysDmg', gStats.physDmg);
+    setStatText('statWpnDmg', gStats.wpnDmg);
+    setStatText('statTotalDmg', gStats.totalDmg);
+    setStatText('statSkillDmg', gStats.skillDmg);
+    setStatText('statMagicDmg', gStats.magicDmg);
+    setStatText('statStyleDmg', gStats.styleDmg);
+    setStatText('statUltDmg', gStats.ultDmg);
+    setStatText('statElemDmg', gStats.elemDmg);
+    setStatText('statDefense', gStats.defense);
+    setStatText('statMoveSpeed', gStats.moveSpeed);
+    setStatText('statEvasion', gStats.evasion);
+    setStatText('statCdr', gStats.cdr);
+    setStatText('statStunRes', gStats.stunRes);
+    setStatText('statStaminaDrain', gStats.staminaDrain, '-');
+    setStatText('statDebuffDuration', gStats.debuffDuration, '-');
 
     if (archetypeName) archetypeName.textContent = calculateBuildArchetype();
 
@@ -252,6 +394,12 @@ document.addEventListener('DOMContentLoaded', () => {
   document.getElementById('resetBuildBtn')?.addEventListener('click', () => {
     stats = { str: 0, vit: 0, agi: 0, light: 0, med: 0, heavy: 0, gun: 0 };
     equippedCards = [];
+    if (raceSelect) raceSelect.value = 'Human';
+    if (clanSelect) clanSelect.value = 'None';
+    currentRace = 'Human';
+    currentClan = 'None';
+    if (raceBadge) raceBadge.textContent = 'HUMAN';
+    if (clanBadge) clanBadge.textContent = 'NONE';
     renderEquippedCards();
     syncSliders();
   });
@@ -365,6 +513,7 @@ document.addEventListener('DOMContentLoaded', () => {
             renderEquippedCards();
             renderCardLibrary();
             renderActiveCardBuffs();
+            updateUI();
           }
         });
       }
@@ -394,6 +543,7 @@ document.addEventListener('DOMContentLoaded', () => {
         renderEquippedCards();
         renderCardLibrary();
         renderActiveCardBuffs();
+        updateUI();
       });
       equippedCardsList.appendChild(tag);
     });

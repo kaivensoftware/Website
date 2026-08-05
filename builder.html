@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Omni Seas | Character Builder - Kaiven Software</title>
-  <meta name="description" content="Omni Seas Character Builder. Plan your 250-stat build, weapon masteries, derived endurance stats, and select talent cards.">
+  <meta name="description" content="Omni Seas Character Builder. Plan your 250-stat build, weapon masteries, derived endurance stats, race/clan perks, and select talent cards.">
   
   <!-- Favicon -->
   <link rel="icon" href="assets/images/omniseas-logo.png" type="image/png">
@@ -87,10 +87,10 @@
       <!-- Builder Main Grid: Left Controls, Right Stats Summary & Card Selector -->
       <div class="builder-grid">
 
-        <!-- Left Column: Faction & Stat Allocation Controls -->
+        <!-- Left Column: Faction, Race, Clan & Stat Allocation Controls -->
         <div class="builder-controls-col">
 
-          <!-- Faction & Origin Selection -->
+          <!-- Faction, Race & Clan Selection -->
           <div class="rs-card builder-card">
             <div class="builder-card-header">
               <h3><i class="fa-solid fa-flag text-cyan"></i> ORIGIN / FACTION</h3>
@@ -127,6 +127,44 @@
                   <span class="faction-name">ADVENTURER</span>
                 </div>
               </label>
+            </div>
+
+            <!-- Race & Clan Dropdown Selectors -->
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 20px;">
+              <div>
+                <label style="font-size: 0.8rem; font-weight: 800; color: var(--rs-cyan); display: block; margin-bottom: 6px;"><i class="fa-solid fa-dna"></i> SELECT RACE</label>
+                <select id="raceSelect" class="rs-select">
+                  <option value="Human">Human (Default)</option>
+                  <option value="Saiyan">Saiyan</option>
+                  <option value="Viltrumite">Viltrumite</option>
+                  <option value="Demon">Demon</option>
+                  <option value="Ghoul">Ghoul</option>
+                  <option value="Nen User">Nen User</option>
+                  <option value="God of Destruction">God of Destruction</option>
+                  <option value="Superhuman">Superhuman</option>
+                  <option value="Majin">Majin</option>
+                  <option value="Angel">Angel</option>
+                  <option value="Shinigami">Shinigami</option>
+                  <option value="Cursed Spirit">Cursed Spirit</option>
+                </select>
+              </div>
+
+              <div>
+                <label style="font-size: 0.8rem; font-weight: 800; color: var(--rs-gold); display: block; margin-bottom: 6px;"><i class="fa-solid fa-shield-cat"></i> SELECT CLAN</label>
+                <select id="clanSelect" class="rs-select">
+                  <option value="None">None (Default)</option>
+                  <option value="Uchiha">Uchiha</option>
+                  <option value="Gojo">Gojo</option>
+                  <option value="Hanma">Hanma</option>
+                  <option value="Kamado">Kamado</option>
+                  <option value="Zoldyck">Zoldyck</option>
+                  <option value="Core Area Warriors">Core Area Warriors</option>
+                  <option value="Dark Empire">Dark Empire</option>
+                  <option value="Dragon Team">Dragon Team</option>
+                  <option value="Viltrum Empire">Viltrum Empire</option>
+                  <option value="Otsutsuki">Otsutsuki</option>
+                </select>
+              </div>
             </div>
           </div>
 
@@ -219,37 +257,80 @@
         <!-- Right Column: Real-Time Character Stats & Cards Library -->
         <div class="builder-stats-col">
 
-          <!-- Character Overview Card -->
+          <!-- Character Overview & Game Stats Card -->
           <div class="rs-card builder-card glow-card" style="padding: 28px;">
             <div class="builder-summary-header">
-              <span class="rs-card-category" id="factionBadge">PIRATES</span>
+              <div style="display: flex; gap: 8px; align-items: center; flex-wrap: wrap;">
+                <span class="rs-card-category" id="factionBadge">PIRATES</span>
+                <span class="rs-card-category" id="raceBadge" style="border-color: var(--rs-cyan); color: var(--rs-cyan);">HUMAN</span>
+                <span class="rs-card-category" id="clanBadge" style="border-color: var(--rs-gold); color: var(--rs-gold);">NONE</span>
+              </div>
               <div class="level-badge">LEVEL <span id="charLevel" class="text-cyan">0</span> / 25</div>
             </div>
 
             <h2 class="build-archetype-name" id="archetypeName">NOVICE MARINER</h2>
 
-            <!-- Base Derived Stats Grid -->
-            <div class="derived-stats-grid" style="margin-top: 20px;">
-              <div class="derived-stat-box">
-                <span class="d-label">Max Health Bonus</span>
-                <span class="d-val text-cyan" id="healthBonus">+0%</span>
-              </div>
-              <div class="derived-stat-box">
-                <span class="d-label">Health Regen</span>
-                <span class="d-val text-cyan" id="healthRegen">+0%</span>
-              </div>
-              <div class="derived-stat-box">
-                <span class="d-label">Max Stamina Bonus</span>
-                <span class="d-val text-cyan" id="staminaBonus">+0%</span>
-              </div>
-              <div class="derived-stat-box">
-                <span class="d-label">Stamina Regen</span>
-                <span class="d-val text-cyan" id="staminaRegen">+0%</span>
-              </div>
-              <div class="derived-stat-box full-width">
-                <span class="d-label">Endurance / Posture Defense</span>
-                <span class="d-val text-gold" id="enduranceBonus">+0%</span>
-              </div>
+            <!-- Comprehensive 26 Game Stats Grid -->
+            <div class="builder-card-header" style="margin-top: 20px; border-bottom: 1px solid rgba(255,255,255,0.08); padding-bottom: 8px;">
+              <h3 style="font-size: 0.9rem;"><i class="fa-solid fa-chart-simple text-cyan"></i> GAME STATS & DERIVED BUFFS</h3>
+            </div>
+
+            <div class="derived-stats-grid" style="margin-top: 14px; grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)); gap: 10px;">
+              <!-- 1. STR -->
+              <div class="derived-stat-box"><span class="d-label">STR</span><span class="d-val text-cyan" id="statStr">0</span></div>
+              <!-- 2. AGI -->
+              <div class="derived-stat-box"><span class="d-label">AGI</span><span class="d-val text-cyan" id="statAgi">0</span></div>
+              <!-- 3. VIT -->
+              <div class="derived-stat-box"><span class="d-label">VIT</span><span class="d-val text-cyan" id="statVit">0</span></div>
+
+              <!-- 4. Max HP -->
+              <div class="derived-stat-box"><span class="d-label">Max HP</span><span class="d-val text-cyan" id="statMaxHp">+0%</span></div>
+              <!-- 5. Max Stamina -->
+              <div class="derived-stat-box"><span class="d-label">Max Stamina</span><span class="d-val text-cyan" id="statMaxStamina">+0%</span></div>
+              <!-- 6. Max Posture -->
+              <div class="derived-stat-box"><span class="d-label">Max Posture</span><span class="d-val text-gold" id="statMaxPosture">+0%</span></div>
+
+              <!-- 7. Health Regen -->
+              <div class="derived-stat-box"><span class="d-label">Health Regen</span><span class="d-val text-cyan" id="statHpRegen">+0%</span></div>
+              <!-- 8. Stamina Regen -->
+              <div class="derived-stat-box"><span class="d-label">Stamina Regen</span><span class="d-val text-cyan" id="statStaminaRegen">+0%</span></div>
+              <!-- 9. Endurance -->
+              <div class="derived-stat-box"><span class="d-label">Endurance</span><span class="d-val text-gold" id="statEndurance">+0%</span></div>
+
+              <!-- 10. Physical Damage -->
+              <div class="derived-stat-box"><span class="d-label">Physical Damage</span><span class="d-val text-cyan" id="statPhysDmg">+0%</span></div>
+              <!-- 11. Weapon Damage -->
+              <div class="derived-stat-box"><span class="d-label">Weapon Damage</span><span class="d-val text-cyan" id="statWpnDmg">+0%</span></div>
+              <!-- 12. Total Damage -->
+              <div class="derived-stat-box"><span class="d-label">Total Damage</span><span class="d-val text-gold" id="statTotalDmg">+0%</span></div>
+
+              <!-- 13. Skill Damage -->
+              <div class="derived-stat-box"><span class="d-label">Skill Damage</span><span class="d-val text-cyan" id="statSkillDmg">+0%</span></div>
+              <!-- 14. Magical Damage -->
+              <div class="derived-stat-box"><span class="d-label">Magical Damage</span><span class="d-val text-cyan" id="statMagicDmg">+0%</span></div>
+              <!-- 15. Fighting Style Damage -->
+              <div class="derived-stat-box"><span class="d-label">Fighting Style Dmg</span><span class="d-val text-cyan" id="statStyleDmg">+0%</span></div>
+
+              <!-- 16. Ultimate Skill Damage -->
+              <div class="derived-stat-box"><span class="d-label">Ultimate Skill Dmg</span><span class="d-val text-gold" id="statUltDmg">+0%</span></div>
+              <!-- 17. Elemental Damage -->
+              <div class="derived-stat-box"><span class="d-label">Elemental Damage</span><span class="d-val text-cyan" id="statElemDmg">+0%</span></div>
+              <!-- 18. Defense -->
+              <div class="derived-stat-box"><span class="d-label">Defense</span><span class="d-val text-cyan" id="statDefense">+0%</span></div>
+
+              <!-- 19. Movement Speed -->
+              <div class="derived-stat-box"><span class="d-label">Movement Speed</span><span class="d-val text-cyan" id="statMoveSpeed">+0%</span></div>
+              <!-- 20. Evasion -->
+              <div class="derived-stat-box"><span class="d-label">Evasion</span><span class="d-val text-cyan" id="statEvasion">+0%</span></div>
+              <!-- 21. Skill Cooldown Reduction -->
+              <div class="derived-stat-box"><span class="d-label">Cooldown Reduction</span><span class="d-val text-cyan" id="statCdr">+0%</span></div>
+
+              <!-- 22. Stun Resistance -->
+              <div class="derived-stat-box"><span class="d-label">Stun Resistance</span><span class="d-val text-cyan" id="statStunRes">+0%</span></div>
+              <!-- 23. Reduced Stamina Drain -->
+              <div class="derived-stat-box"><span class="d-label">Reduced Stamina Drain</span><span class="d-val text-cyan" id="statStaminaDrain">-0%</span></div>
+              <!-- 24. Status Effect Immunity / Debuff Duration -->
+              <div class="derived-stat-box"><span class="d-label">Debuff Duration</span><span class="d-val text-cyan" id="statDebuffDuration">-0%</span></div>
             </div>
 
             <!-- Active Card Bonuses & Buffs List Box -->
