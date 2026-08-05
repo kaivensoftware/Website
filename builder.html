@@ -134,35 +134,49 @@
               <div>
                 <label style="font-size: 0.8rem; font-weight: 800; color: var(--rs-cyan); display: block; margin-bottom: 6px;"><i class="fa-solid fa-dna"></i> SELECT RACE</label>
                 <select id="raceSelect" class="rs-select">
-                  <option value="Human">Human (Default)</option>
-                  <option value="Saiyan">Saiyan</option>
-                  <option value="Viltrumite">Viltrumite</option>
-                  <option value="Demon">Demon</option>
-                  <option value="Ghoul">Ghoul</option>
-                  <option value="Nen User">Nen User</option>
-                  <option value="God of Destruction">God of Destruction</option>
-                  <option value="Superhuman">Superhuman</option>
-                  <option value="Majin">Majin</option>
-                  <option value="Angel">Angel</option>
-                  <option value="Shinigami">Shinigami</option>
-                  <option value="Cursed Spirit">Cursed Spirit</option>
+                  <option value="Human">Human (+5% Training EXP)</option>
+                  <option value="Skilled Human">Skilled Human (+10% EXP, +5% Stamina Regen)</option>
+                  <option value="Peak Human">Peak Human (+10% Speed, +10% EXP)</option>
+                  <option value="Superhuman">Superhuman (+20% Phys Dmg, +15% HP)</option>
+                  <option value="Viltrumite">Viltrumite (+20% Phys Dmg, +25% HP)</option>
+                  <option value="Hollow">Hollow (+15% Physical Damage)</option>
+                  <option value="Fullbringer">Fullbringer (+10% Speed, +10% Weapon Dmg)</option>
+                  <option value="Demon">Demon (+25% HP Regen, -15% Defense)</option>
+                  <option value="Ghoul">Ghoul (+15% Physical Damage)</option>
+                  <option value="Cursed Spirit">Cursed Spirit (+15% Def, +20% Magic Dmg)</option>
+                  <option value="Shinigami">Shinigami (+15% Weapon Dmg, +10% Posture)</option>
+                  <option value="Arrancar">Arrancar (+20% Def, +15% Magic Dmg)</option>
+                  <option value="Quincy">Quincy (+15% Weapon Damage)</option>
+                  <option value="Death Painting Womb">Death Painting Womb (+20% HP Regen)</option>
+                  <option value="Half-Ghoul">Half-Ghoul (-20% Stamina Drain, +15% Phys)</option>
+                  <option value="Devil">Devil (+15% Total Damage)</option>
+                  <option value="Fiend">Fiend (+15% Defense, +10% HP Regen)</option>
+                  <option value="Hybrid">Hybrid (+15% Total Damage, +10% HP Regen)</option>
+                  <option value="Chimera Ant">Chimera Ant (+10% Total Damage)</option>
+                  <option value="Nen User">Nen User (+20% Defense, +15% Skill Dmg)</option>
+                  <option value="Saiyan">Saiyan (+15% Total Dmg below 30% HP)</option>
+                  <option value="Majin">Majin (+30% HP Regen, Status Immunity)</option>
+                  <option value="Angel">Angel (+10% Evasion, +15% Magic Dmg)</option>
+                  <option value="God of Destruction">God of Destruction (+35% Total Dmg)</option>
                 </select>
               </div>
 
               <div>
                 <label style="font-size: 0.8rem; font-weight: 800; color: var(--rs-gold); display: block; margin-bottom: 6px;"><i class="fa-solid fa-shield-cat"></i> SELECT CLAN</label>
                 <select id="clanSelect" class="rs-select">
-                  <option value="None">None (Default)</option>
-                  <option value="Uchiha">Uchiha</option>
-                  <option value="Gojo">Gojo</option>
-                  <option value="Hanma">Hanma</option>
-                  <option value="Kamado">Kamado</option>
-                  <option value="Zoldyck">Zoldyck</option>
-                  <option value="Core Area Warriors">Core Area Warriors</option>
-                  <option value="Dark Empire">Dark Empire</option>
-                  <option value="Dragon Team">Dragon Team</option>
-                  <option value="Viltrum Empire">Viltrum Empire</option>
-                  <option value="Otsutsuki">Otsutsuki</option>
+                  <option value="None">None (No Clan Perk)</option>
+                  <option value="Kamado">Kamado (+3% HP Regen, +5% Stamina)</option>
+                  <option value="Hyuga">Hyuga (+3% Max HP, +5% Style Dmg)</option>
+                  <option value="Uzumaki">Uzumaki (+5% Max HP, +3% Endurance)</option>
+                  <option value="Dragon Team">Dragon Team (+5% Phys Dmg, +5% Stamina)</option>
+                  <option value="Zoldyck">Zoldyck (+8% Total Dmg, +12% Speed)</option>
+                  <option value="Hanma">Hanma (+10% Phys Dmg, +8% Stun Res)</option>
+                  <option value="Uchiha">Uchiha (-12% CDR, +10% Skill Dmg)</option>
+                  <option value="Gojo">Gojo (+15% Skill Dmg, +10% Evasion)</option>
+                  <option value="Core Area Warriors">Core Area Warriors (+20% Ult Dmg)</option>
+                  <option value="Dark Empire">Dark Empire (+15% Total Dmg, +12% Debuff)</option>
+                  <option value="Otsutsuki">Otsutsuki (+18% Elem Dmg, +10% Stamina)</option>
+                  <option value="Viltrum Empire">Viltrum Empire (+20% Phys Dmg, +15% End)</option>
                 </select>
               </div>
             </div>
@@ -210,37 +224,37 @@
               <span class="stat-pool-badge" id="masteryPoolBadge">MASTERY REMAINING: <strong id="masteryRemaining" class="text-gold">100</strong> / 100</span>
             </div>
 
-            <!-- Light Weapon -->
+            <!-- Light Weapon (LHT) -->
             <div class="stat-control-group">
               <div class="stat-label-bar">
-                <span class="stat-title">Light Weapon</span>
+                <span class="stat-title">Light Weapon (LHT)</span>
                 <span class="stat-val-display" id="lightVal">0</span>
               </div>
               <input type="range" id="lightSlider" min="0" max="100" value="0" class="rs-slider gold-slider">
             </div>
 
-            <!-- Medium Weapon -->
+            <!-- Medium Weapon (MED) -->
             <div class="stat-control-group">
               <div class="stat-label-bar">
-                <span class="stat-title">Medium Weapon</span>
+                <span class="stat-title">Medium Weapon (MED)</span>
                 <span class="stat-val-display" id="medVal">0</span>
               </div>
               <input type="range" id="medSlider" min="0" max="100" value="0" class="rs-slider gold-slider">
             </div>
 
-            <!-- Heavy Weapon -->
+            <!-- Heavy Weapon (HVY) -->
             <div class="stat-control-group">
               <div class="stat-label-bar">
-                <span class="stat-title">Heavy Weapon</span>
+                <span class="stat-title">Heavy Weapon (HVY)</span>
                 <span class="stat-val-display" id="heavyVal">0</span>
               </div>
               <input type="range" id="heavySlider" min="0" max="100" value="0" class="rs-slider gold-slider">
             </div>
 
-            <!-- Gun -->
+            <!-- Gun (GUN) -->
             <div class="stat-control-group">
               <div class="stat-label-bar">
-                <span class="stat-title">Gun</span>
+                <span class="stat-title">Gun (GUN)</span>
                 <span class="stat-val-display" id="gunVal">0</span>
               </div>
               <input type="range" id="gunSlider" min="0" max="100" value="0" class="rs-slider gold-slider">
@@ -276,61 +290,47 @@
             </div>
 
             <div class="derived-stats-grid" style="margin-top: 14px; grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)); gap: 10px;">
-              <!-- 1. STR -->
+              <!-- Trainable Core Stats -->
               <div class="derived-stat-box"><span class="d-label">STR</span><span class="d-val text-cyan" id="statStr">0</span></div>
-              <!-- 2. AGI -->
               <div class="derived-stat-box"><span class="d-label">AGI</span><span class="d-val text-cyan" id="statAgi">0</span></div>
-              <!-- 3. VIT -->
               <div class="derived-stat-box"><span class="d-label">VIT</span><span class="d-val text-cyan" id="statVit">0</span></div>
 
-              <!-- 4. Max HP -->
-              <div class="derived-stat-box"><span class="d-label">Max HP</span><span class="d-val text-cyan" id="statMaxHp">+0%</span></div>
-              <!-- 5. Max Stamina -->
-              <div class="derived-stat-box"><span class="d-label">Max Stamina</span><span class="d-val text-cyan" id="statMaxStamina">+0%</span></div>
-              <!-- 6. Max Posture -->
-              <div class="derived-stat-box"><span class="d-label">Max Posture</span><span class="d-val text-gold" id="statMaxPosture">+0%</span></div>
+              <!-- Masteries -->
+              <div class="derived-stat-box"><span class="d-label">LHT Mastery</span><span class="d-val text-gold" id="statLht">0</span></div>
+              <div class="derived-stat-box"><span class="d-label">MED Mastery</span><span class="d-val text-gold" id="statMed">0</span></div>
+              <div class="derived-stat-box"><span class="d-label">HVY Mastery</span><span class="d-val text-gold" id="statHvy">0</span></div>
+              <div class="derived-stat-box"><span class="d-label">GUN Mastery</span><span class="d-val text-gold" id="statGun">0</span></div>
 
-              <!-- 7. Health Regen -->
-              <div class="derived-stat-box"><span class="d-label">Health Regen</span><span class="d-val text-cyan" id="statHpRegen">+0%</span></div>
-              <!-- 8. Stamina Regen -->
-              <div class="derived-stat-box"><span class="d-label">Stamina Regen</span><span class="d-val text-cyan" id="statStaminaRegen">+0%</span></div>
-              <!-- 9. Endurance -->
-              <div class="derived-stat-box"><span class="d-label">Endurance</span><span class="d-val text-gold" id="statEndurance">+0%</span></div>
+              <!-- Health & Stamina Caps (Max 50%) -->
+              <div class="derived-stat-box"><span class="d-label">Max HP (Cap 50%)</span><span class="d-val text-cyan" id="statMaxHp">+0%</span></div>
+              <div class="derived-stat-box"><span class="d-label">Max Stamina (Cap 50%)</span><span class="d-val text-cyan" id="statMaxStamina">+0%</span></div>
+              <div class="derived-stat-box"><span class="d-label">Max Posture (Cap 50%)</span><span class="d-val text-gold" id="statMaxPosture">+0%</span></div>
 
-              <!-- 10. Physical Damage -->
-              <div class="derived-stat-box"><span class="d-label">Physical Damage</span><span class="d-val text-cyan" id="statPhysDmg">+0%</span></div>
-              <!-- 11. Weapon Damage -->
-              <div class="derived-stat-box"><span class="d-label">Weapon Damage</span><span class="d-val text-cyan" id="statWpnDmg">+0%</span></div>
-              <!-- 12. Total Damage -->
-              <div class="derived-stat-box"><span class="d-label">Total Damage</span><span class="d-val text-gold" id="statTotalDmg">+0%</span></div>
+              <!-- Regens & Endurance (Cap 50%) -->
+              <div class="derived-stat-box"><span class="d-label">Health Regen (Cap 50%)</span><span class="d-val text-cyan" id="statHpRegen">+0%</span></div>
+              <div class="derived-stat-box"><span class="d-label">Stamina Regen (Cap 50%)</span><span class="d-val text-cyan" id="statStaminaRegen">+0%</span></div>
+              <div class="derived-stat-box"><span class="d-label">Endurance (Cap 50%)</span><span class="d-val text-gold" id="statEndurance">+0%</span></div>
 
-              <!-- 13. Skill Damage -->
-              <div class="derived-stat-box"><span class="d-label">Skill Damage</span><span class="d-val text-cyan" id="statSkillDmg">+0%</span></div>
-              <!-- 14. Magical Damage -->
-              <div class="derived-stat-box"><span class="d-label">Magical Damage</span><span class="d-val text-cyan" id="statMagicDmg">+0%</span></div>
-              <!-- 15. Fighting Style Damage -->
-              <div class="derived-stat-box"><span class="d-label">Fighting Style Dmg</span><span class="d-val text-cyan" id="statStyleDmg">+0%</span></div>
+              <!-- Damage Multipliers (Cap 300% / 100%) -->
+              <div class="derived-stat-box"><span class="d-label">Physical Dmg (300%)</span><span class="d-val text-cyan" id="statPhysDmg">+0%</span></div>
+              <div class="derived-stat-box"><span class="d-label">Weapon Dmg (300%)</span><span class="d-val text-cyan" id="statWpnDmg">+0%</span></div>
+              <div class="derived-stat-box"><span class="d-label">Total Dmg (100%)</span><span class="d-val text-gold" id="statTotalDmg">+0%</span></div>
+              <div class="derived-stat-box"><span class="d-label">Skill Dmg (300%)</span><span class="d-val text-cyan" id="statSkillDmg">+0%</span></div>
+              <div class="derived-stat-box"><span class="d-label">Magical Dmg (300%)</span><span class="d-val text-cyan" id="statMagicDmg">+0%</span></div>
+              <div class="derived-stat-box"><span class="d-label">Style Dmg (100%)</span><span class="d-val text-cyan" id="statStyleDmg">+0%</span></div>
+              <div class="derived-stat-box"><span class="d-label">Ult Skill Dmg (100%)</span><span class="d-val text-gold" id="statUltDmg">+0%</span></div>
+              <div class="derived-stat-box"><span class="d-label">Elemental Dmg (300%)</span><span class="d-val text-cyan" id="statElemDmg">+0%</span></div>
 
-              <!-- 16. Ultimate Skill Damage -->
-              <div class="derived-stat-box"><span class="d-label">Ultimate Skill Dmg</span><span class="d-val text-gold" id="statUltDmg">+0%</span></div>
-              <!-- 17. Elemental Damage -->
-              <div class="derived-stat-box"><span class="d-label">Elemental Damage</span><span class="d-val text-cyan" id="statElemDmg">+0%</span></div>
-              <!-- 18. Defense -->
-              <div class="derived-stat-box"><span class="d-label">Defense</span><span class="d-val text-cyan" id="statDefense">+0%</span></div>
+              <!-- Defenses, Speed & Evasion -->
+              <div class="derived-stat-box"><span class="d-label">Defense (Cap 100%)</span><span class="d-val text-cyan" id="statDefense">+0%</span></div>
+              <div class="derived-stat-box"><span class="d-label">Move Speed (300%)</span><span class="d-val text-cyan" id="statMoveSpeed">+0%</span></div>
+              <div class="derived-stat-box"><span class="d-label">Evasion (Cap 10%)</span><span class="d-val text-cyan" id="statEvasion">+0%</span></div>
+              <div class="derived-stat-box"><span class="d-label">CDR (Cap 50%)</span><span class="d-val text-cyan" id="statCdr">-0%</span></div>
 
-              <!-- 19. Movement Speed -->
-              <div class="derived-stat-box"><span class="d-label">Movement Speed</span><span class="d-val text-cyan" id="statMoveSpeed">+0%</span></div>
-              <!-- 20. Evasion -->
-              <div class="derived-stat-box"><span class="d-label">Evasion</span><span class="d-val text-cyan" id="statEvasion">+0%</span></div>
-              <!-- 21. Skill Cooldown Reduction -->
-              <div class="derived-stat-box"><span class="d-label">Cooldown Reduction</span><span class="d-val text-cyan" id="statCdr">+0%</span></div>
-
-              <!-- 22. Stun Resistance -->
-              <div class="derived-stat-box"><span class="d-label">Stun Resistance</span><span class="d-val text-cyan" id="statStunRes">+0%</span></div>
-              <!-- 23. Reduced Stamina Drain -->
-              <div class="derived-stat-box"><span class="d-label">Reduced Stamina Drain</span><span class="d-val text-cyan" id="statStaminaDrain">-0%</span></div>
-              <!-- 24. Status Effect Immunity / Debuff Duration -->
-              <div class="derived-stat-box"><span class="d-label">Debuff Duration</span><span class="d-val text-cyan" id="statDebuffDuration">-0%</span></div>
+              <!-- Resistances -->
+              <div class="derived-stat-box"><span class="d-label">Stun Res (Cap 50%)</span><span class="d-val text-cyan" id="statStunRes">+0%</span></div>
+              <div class="derived-stat-box"><span class="d-label">Stamina Drain (50%)</span><span class="d-val text-cyan" id="statStaminaDrain">-0%</span></div>
+              <div class="derived-stat-box"><span class="d-label">Debuff Duration (50%)</span><span class="d-val text-cyan" id="statDebuffDuration">-0%</span></div>
             </div>
 
             <!-- Active Card Bonuses & Buffs List Box -->
