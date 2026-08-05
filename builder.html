@@ -291,46 +291,46 @@
 
             <div class="derived-stats-grid" style="margin-top: 14px; grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)); gap: 10px;">
               <!-- Trainable Core Stats -->
-              <div class="derived-stat-box"><span class="d-label">STR</span><span class="d-val text-cyan" id="statStr">0</span></div>
-              <div class="derived-stat-box"><span class="d-label">AGI</span><span class="d-val text-cyan" id="statAgi">0</span></div>
-              <div class="derived-stat-box"><span class="d-label">VIT</span><span class="d-val text-cyan" id="statVit">0</span></div>
+              <div class="derived-stat-box"><span class="d-label">STR</span><span class="d-val text-cyan" id="statStr">0 | 100</span></div>
+              <div class="derived-stat-box"><span class="d-label">AGI</span><span class="d-val text-cyan" id="statAgi">0 | 100</span></div>
+              <div class="derived-stat-box"><span class="d-label">VIT</span><span class="d-val text-cyan" id="statVit">0 | 100</span></div>
 
               <!-- Masteries -->
-              <div class="derived-stat-box"><span class="d-label">LHT Mastery</span><span class="d-val text-gold" id="statLht">0</span></div>
-              <div class="derived-stat-box"><span class="d-label">MED Mastery</span><span class="d-val text-gold" id="statMed">0</span></div>
-              <div class="derived-stat-box"><span class="d-label">HVY Mastery</span><span class="d-val text-gold" id="statHvy">0</span></div>
-              <div class="derived-stat-box"><span class="d-label">GUN Mastery</span><span class="d-val text-gold" id="statGun">0</span></div>
+              <div class="derived-stat-box"><span class="d-label">LHT Mastery</span><span class="d-val text-gold" id="statLht">0 | 100</span></div>
+              <div class="derived-stat-box"><span class="d-label">MED Mastery</span><span class="d-val text-gold" id="statMed">0 | 100</span></div>
+              <div class="derived-stat-box"><span class="d-label">HVY Mastery</span><span class="d-val text-gold" id="statHvy">0 | 100</span></div>
+              <div class="derived-stat-box"><span class="d-label">GUN Mastery</span><span class="d-val text-gold" id="statGun">0 | 100</span></div>
 
-              <!-- Health & Stamina Caps (Max 50%) -->
-              <div class="derived-stat-box"><span class="d-label">Max HP (Cap 50%)</span><span class="d-val text-cyan" id="statMaxHp">+0%</span></div>
-              <div class="derived-stat-box"><span class="d-label">Max Stamina (Cap 50%)</span><span class="d-val text-cyan" id="statMaxStamina">+0%</span></div>
-              <div class="derived-stat-box"><span class="d-label">Max Posture (Cap 50%)</span><span class="d-val text-gold" id="statMaxPosture">+0%</span></div>
+              <!-- Health & Stamina Caps -->
+              <div class="derived-stat-box"><span class="d-label">Max HP</span><span class="d-val text-cyan" id="statMaxHp">+0% | +50%</span></div>
+              <div class="derived-stat-box"><span class="d-label">Max Stamina</span><span class="d-val text-cyan" id="statMaxStamina">+0% | +50%</span></div>
+              <div class="derived-stat-box"><span class="d-label">Max Posture</span><span class="d-val text-gold" id="statMaxPosture">+0% | +50%</span></div>
 
-              <!-- Regens & Endurance (Cap 50%) -->
-              <div class="derived-stat-box"><span class="d-label">Health Regen (Cap 50%)</span><span class="d-val text-cyan" id="statHpRegen">+0%</span></div>
-              <div class="derived-stat-box"><span class="d-label">Stamina Regen (Cap 50%)</span><span class="d-val text-cyan" id="statStaminaRegen">+0%</span></div>
-              <div class="derived-stat-box"><span class="d-label">Endurance (Cap 50%)</span><span class="d-val text-gold" id="statEndurance">+0%</span></div>
+              <!-- Regens & Endurance -->
+              <div class="derived-stat-box"><span class="d-label">Health Regen</span><span class="d-val text-cyan" id="statHpRegen">+0% | +50%</span></div>
+              <div class="derived-stat-box"><span class="d-label">Stamina Regen</span><span class="d-val text-cyan" id="statStaminaRegen">+0% | +50%</span></div>
+              <div class="derived-stat-box"><span class="d-label">Endurance</span><span class="d-val text-gold" id="statEndurance">+0% | +50%</span></div>
 
-              <!-- Damage Multipliers (Cap 300% / 100%) -->
-              <div class="derived-stat-box"><span class="d-label">Physical Dmg (300%)</span><span class="d-val text-cyan" id="statPhysDmg">+0%</span></div>
-              <div class="derived-stat-box"><span class="d-label">Weapon Dmg (300%)</span><span class="d-val text-cyan" id="statWpnDmg">+0%</span></div>
-              <div class="derived-stat-box"><span class="d-label">Total Dmg (100%)</span><span class="d-val text-gold" id="statTotalDmg">+0%</span></div>
-              <div class="derived-stat-box"><span class="d-label">Skill Dmg (300%)</span><span class="d-val text-cyan" id="statSkillDmg">+0%</span></div>
-              <div class="derived-stat-box"><span class="d-label">Magical Dmg (300%)</span><span class="d-val text-cyan" id="statMagicDmg">+0%</span></div>
-              <div class="derived-stat-box"><span class="d-label">Style Dmg (100%)</span><span class="d-val text-cyan" id="statStyleDmg">+0%</span></div>
-              <div class="derived-stat-box"><span class="d-label">Ult Skill Dmg (100%)</span><span class="d-val text-gold" id="statUltDmg">+0%</span></div>
-              <div class="derived-stat-box"><span class="d-label">Elemental Dmg (300%)</span><span class="d-val text-cyan" id="statElemDmg">+0%</span></div>
+              <!-- Damage Multipliers -->
+              <div class="derived-stat-box"><span class="d-label">Physical Damage</span><span class="d-val text-cyan" id="statPhysDmg">+0% | +300%</span></div>
+              <div class="derived-stat-box"><span class="d-label">Weapon Damage</span><span class="d-val text-cyan" id="statWpnDmg">+0% | +300%</span></div>
+              <div class="derived-stat-box"><span class="d-label">Total Damage</span><span class="d-val text-gold" id="statTotalDmg">+0% | +100%</span></div>
+              <div class="derived-stat-box"><span class="d-label">Skill Damage</span><span class="d-val text-cyan" id="statSkillDmg">+0% | +300%</span></div>
+              <div class="derived-stat-box"><span class="d-label">Magical Damage</span><span class="d-val text-cyan" id="statMagicDmg">+0% | +300%</span></div>
+              <div class="derived-stat-box"><span class="d-label">Fighting Style Dmg</span><span class="d-val text-cyan" id="statStyleDmg">+0% | +100%</span></div>
+              <div class="derived-stat-box"><span class="d-label">Ultimate Skill Dmg</span><span class="d-val text-gold" id="statUltDmg">+0% | +100%</span></div>
+              <div class="derived-stat-box"><span class="d-label">Elemental Damage</span><span class="d-val text-cyan" id="statElemDmg">+0% | +300%</span></div>
 
               <!-- Defenses, Speed & Evasion -->
-              <div class="derived-stat-box"><span class="d-label">Defense (Cap 100%)</span><span class="d-val text-cyan" id="statDefense">+0%</span></div>
-              <div class="derived-stat-box"><span class="d-label">Move Speed (300%)</span><span class="d-val text-cyan" id="statMoveSpeed">+0%</span></div>
-              <div class="derived-stat-box"><span class="d-label">Evasion (Cap 10%)</span><span class="d-val text-cyan" id="statEvasion">+0%</span></div>
-              <div class="derived-stat-box"><span class="d-label">CDR (Cap 50%)</span><span class="d-val text-cyan" id="statCdr">-0%</span></div>
+              <div class="derived-stat-box"><span class="d-label">Defense</span><span class="d-val text-cyan" id="statDefense">+0% | +100%</span></div>
+              <div class="derived-stat-box"><span class="d-label">Movement Speed</span><span class="d-val text-cyan" id="statMoveSpeed">+0% | +300%</span></div>
+              <div class="derived-stat-box"><span class="d-label">Evasion</span><span class="d-val text-cyan" id="statEvasion">+0% | +10%</span></div>
+              <div class="derived-stat-box"><span class="d-label">Cooldown Reduction</span><span class="d-val text-cyan" id="statCdr">-0% | -50%</span></div>
 
               <!-- Resistances -->
-              <div class="derived-stat-box"><span class="d-label">Stun Res (Cap 50%)</span><span class="d-val text-cyan" id="statStunRes">+0%</span></div>
-              <div class="derived-stat-box"><span class="d-label">Stamina Drain (50%)</span><span class="d-val text-cyan" id="statStaminaDrain">-0%</span></div>
-              <div class="derived-stat-box"><span class="d-label">Debuff Duration (50%)</span><span class="d-val text-cyan" id="statDebuffDuration">-0%</span></div>
+              <div class="derived-stat-box"><span class="d-label">Stun Resistance</span><span class="d-val text-cyan" id="statStunRes">+0% | +50%</span></div>
+              <div class="derived-stat-box"><span class="d-label">Reduced Stamina Drain</span><span class="d-val text-cyan" id="statStaminaDrain">-0% | -50%</span></div>
+              <div class="derived-stat-box"><span class="d-label">Debuff Duration</span><span class="d-val text-cyan" id="statDebuffDuration">-0% | -50%</span></div>
             </div>
 
             <!-- Active Card Bonuses & Buffs List Box -->

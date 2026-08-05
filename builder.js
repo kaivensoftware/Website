@@ -1,6 +1,7 @@
 /* ==========================================================================
    OMNI SEAS CHARACTER BUILDER ENGINE
    Synchronized with Cards.json, Races_and_clans.json, & Stats.json
+   Format: Current Value | Cap (e.g. +0% | +50%)
    ========================================================================== */
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -393,7 +394,7 @@ document.addEventListener('DOMContentLoaded', () => {
   let equippedCards = [];
   let selectedCategory = 'ALL';
 
-  // Parse Requirement String (Handles abbreviated LHT, MED, HVY, GUN, STR, VIT, AGI, Faction, Race, Clan)
+  // Parse Requirement String
   function meetsRequirement(reqStr) {
     if (!reqStr || reqStr === '0') return true;
 
@@ -556,7 +557,6 @@ document.addEventListener('DOMContentLoaded', () => {
       applyEffectString(c.effect);
     });
 
-    // Enforce Stat Cap Ranges from Stats.json
     return {
       str: stats.str,
       agi: stats.agi,
@@ -618,56 +618,52 @@ document.addEventListener('DOMContentLoaded', () => {
     if (charLevel) charLevel.textContent = level;
     if (levelPackCount) levelPackCount.textContent = `Level ${level} (Max 25)`;
 
-    // Calculate & Display 26 Game Stats
+    // Calculate & Display 26 Game Stats with +VAL% | +CAP% format
     const gStats = calculateGameStats();
 
-    const setStatText = (id, val, prefix = '+') => {
+    const setStatTextWithCap = (id, val, capVal, prefix = '+') => {
       const el = document.getElementById(id);
-      if (el) el.textContent = typeof val === 'number' ? `${prefix}${val.toFixed(0)}%` : val;
+      if (el) {
+        el.textContent = `${prefix}${val.toFixed(0)}% | ${prefix}${capVal}%`;
+      }
     };
 
-    const statStrEl = document.getElementById('statStr');
-    if (statStrEl) statStrEl.textContent = gStats.str;
+    const setCoreStatText = (id, val) => {
+      const el = document.getElementById(id);
+      if (el) el.textContent = `${val} | 100`;
+    };
 
-    const statAgiEl = document.getElementById('statAgi');
-    if (statAgiEl) statAgiEl.textContent = gStats.agi;
+    // Trainable Stats
+    setCoreStatText('statStr', gStats.str);
+    setCoreStatText('statAgi', gStats.agi);
+    setCoreStatText('statVit', gStats.vit);
+    setCoreStatText('statLht', gStats.light);
+    setCoreStatText('statMed', gStats.med);
+    setCoreStatText('statHvy', gStats.heavy);
+    setCoreStatText('statGun', gStats.gun);
 
-    const statVitEl = document.getElementById('statVit');
-    if (statVitEl) statVitEl.textContent = gStats.vit;
-
-    const statLhtEl = document.getElementById('statLht');
-    if (statLhtEl) statLhtEl.textContent = gStats.light;
-
-    const statMedEl = document.getElementById('statMed');
-    if (statMedEl) statMedEl.textContent = gStats.med;
-
-    const statHvyEl = document.getElementById('statHvy');
-    if (statHvyEl) statHvyEl.textContent = gStats.heavy;
-
-    const statGunEl = document.getElementById('statGun');
-    if (statGunEl) statGunEl.textContent = gStats.gun;
-
-    setStatText('statMaxHp', gStats.maxHp);
-    setStatText('statMaxStamina', gStats.maxStamina);
-    setStatText('statMaxPosture', gStats.maxPosture);
-    setStatText('statHpRegen', gStats.hpRegen);
-    setStatText('statStaminaRegen', gStats.staminaRegen);
-    setStatText('statEndurance', gStats.endurance);
-    setStatText('statPhysDmg', gStats.physDmg);
-    setStatText('statWpnDmg', gStats.wpnDmg);
-    setStatText('statTotalDmg', gStats.totalDmg);
-    setStatText('statSkillDmg', gStats.skillDmg);
-    setStatText('statMagicDmg', gStats.magicDmg);
-    setStatText('statStyleDmg', gStats.styleDmg);
-    setStatText('statUltDmg', gStats.ultDmg);
-    setStatText('statElemDmg', gStats.elemDmg);
-    setStatText('statDefense', gStats.defense);
-    setStatText('statMoveSpeed', gStats.moveSpeed);
-    setStatText('statEvasion', gStats.evasion);
-    setStatText('statCdr', gStats.cdr, '-');
-    setStatText('statStunRes', gStats.stunRes);
-    setStatText('statStaminaDrain', gStats.staminaDrain, '-');
-    setStatText('statDebuffDuration', gStats.debuffDuration, '-');
+    // Derived Caps
+    setStatTextWithCap('statMaxHp', gStats.maxHp, 50);
+    setStatTextWithCap('statMaxStamina', gStats.maxStamina, 50);
+    setStatTextWithCap('statMaxPosture', gStats.maxPosture, 50);
+    setStatTextWithCap('statHpRegen', gStats.hpRegen, 50);
+    setStatTextWithCap('statStaminaRegen', gStats.staminaRegen, 50);
+    setStatTextWithCap('statEndurance', gStats.endurance, 50);
+    setStatTextWithCap('statPhysDmg', gStats.physDmg, 300);
+    setStatTextWithCap('statWpnDmg', gStats.wpnDmg, 300);
+    setStatTextWithCap('statTotalDmg', gStats.totalDmg, 100);
+    setStatTextWithCap('statSkillDmg', gStats.skillDmg, 300);
+    setStatTextWithCap('statMagicDmg', gStats.magicDmg, 300);
+    setStatTextWithCap('statStyleDmg', gStats.styleDmg, 100);
+    setStatTextWithCap('statUltDmg', gStats.ultDmg, 100);
+    setStatTextWithCap('statElemDmg', gStats.elemDmg, 300);
+    setStatTextWithCap('statDefense', gStats.defense, 100);
+    setStatTextWithCap('statMoveSpeed', gStats.moveSpeed, 300);
+    setStatTextWithCap('statEvasion', gStats.evasion, 10);
+    setStatTextWithCap('statCdr', gStats.cdr, 50, '-');
+    setStatTextWithCap('statStunRes', gStats.stunRes, 50);
+    setStatTextWithCap('statStaminaDrain', gStats.staminaDrain, 50, '-');
+    setStatTextWithCap('statDebuffDuration', gStats.debuffDuration, 50, '-');
 
     if (archetypeName) archetypeName.textContent = calculateBuildArchetype();
 
