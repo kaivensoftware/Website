@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>GOLDEN STATE | Kaiven Software</title>
+  <meta name="description" content="Golden State is an upcoming action and roleplay experience on Roblox created by Kaiven Software. Join our Roblox community group or Discord server.">
+  
+  <!-- Favicon -->
+  <link rel="icon" href="assets/images/logo.png" type="image/png">
+
+  <!-- Google Fonts: Inter -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+  <!-- FontAwesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+  <link rel="stylesheet" href="style.css?v=2.0.5">
+</head>
+<body class="kaiven-site">
+
+  <!-- Background Canvas -->
+  <canvas id="oceanCanvas"></canvas>
+  <div class="rs-grid-overlay"></div>
+
+  <!-- Header -->
+  <header class="rs-navbar" id="navbar">
+    <div class="rs-nav-container">
+
+      <!-- Left: Logo & Core Nav -->
+      <div class="rs-nav-left">
+        <a href="index.html" class="rs-logo-link" title="Kaiven Software Home">
+          <div class="rs-logo-box glow-hover">
+            <img src="assets/images/logo.png" alt="Logo" class="rs-logo-img">
+          </div>
+        </a>
+
+        <nav class="rs-main-menu" id="mainMenu">
+          <a href="index.html" class="rs-menu-item">HOME</a>
+          <a href="games.html" class="rs-menu-item active">GAMES</a>
+          <a href="https://www.roblox.com/communities/674886308/Kaiven-Software" target="_blank" class="rs-menu-item">COMMUNITY</a>
+          <a href="store.html" class="rs-menu-item">STORE</a>
+          <a href="index.html#support" class="rs-menu-item">SUPPORT</a>
+        </nav>
+      </div>
+
+      <!-- Right: Utility Actions & Account -->
+      <div class="rs-nav-right">
+        <a href="https://discord.gg/ccWf2pxShW" target="_blank" class="rs-btn-launcher btn-shimmer" style="background: linear-gradient(135deg, var(--rs-gold) 0%, #d49520 100%); color: #000;">
+          DISCORD
+        </a>
+        <button class="rs-icon-btn" id="openSearchBtn" title="Search">
+          <i class="fa-solid fa-magnifying-glass"></i>
+        </button>
+        <a href="https://discord.gg/ccWf2pxShW" target="_blank" class="rs-user-btn" title="Discord Community">
+          <i class="fa-brands fa-discord"></i>
+        </a>
+        <button class="rs-hamburger-btn" id="mobileToggle" aria-label="Toggle Navigation">
+          <i class="fa-solid fa-bars"></i>
+        </button>
+      </div>
+
+    </div>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="rs-hero" id="overview" style="min-height: calc(100vh - 180px); display: flex; align-items: center;">
+    <div class="rs-hero-backdrop"></div>
+    <div class="rs-hero-gradient"></div>
+
+    <div class="rs-hero-container container">
+      <div class="rs-hero-card" style="max-width: 850px; margin: 0 auto; text-align: center;">
+        <div class="hero-logo-wrapper" style="margin-bottom: 24px; border-radius: 12px; overflow: hidden; border: 1px solid var(--rs-gold); box-shadow: 0 0 35px rgba(224, 169, 56, 0.25);">
+          <img src="assets/images/golden-state.jpg" alt="Golden State Banner" style="width: 100%; max-height: 320px; object-fit: cover;">
+        </div>
+
+        <div class="rs-hero-tag"><i class="fa-solid fa-city text-gold"></i> ROBLOX GAME</div>
+        <h1 class="rs-hero-title" style="font-size: clamp(3rem, 7vw, 5.5rem); background: linear-gradient(135deg, #ffffff 0%, var(--rs-gold) 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">GOLDEN STATE</h1>
+        <p class="rs-platform-tag" style="display: inline-block; margin-bottom: 20px; color: var(--rs-gold); border-color: var(--rs-gold);">ROLEPLAY & ACTION • UPCOMING EXPERIENCE</p>
+
+        <p class="rs-hero-desc" style="font-size: 1.2rem; line-height: 1.7; margin-bottom: 36px;">
+          An upcoming high-stakes roleplay and action experience developed by Kaiven Software on Roblox. Explore modern urban environments, custom gear, and community events.
+        </p>
+
+        <div class="rs-hero-buttons" style="justify-content: center;">
+          <a href="https://discord.gg/ccWf2pxShW" target="_blank" class="rs-btn-primary btn-shimmer" style="background: linear-gradient(135deg, var(--rs-gold) 0%, #d49520 100%); color: #000;">
+            JOIN DISCORD COMMUNITY <i class="fa-brands fa-discord"></i>
+          </a>
+          <a href="https://www.roblox.com/communities/674886308/Kaiven-Software" target="_blank" class="rs-btn-secondary">
+            ROBLOX COMMUNITY GROUP <i class="fa-solid fa-users"></i>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Overview Cards -->
+  <section class="rs-newswire-section" style="padding-top: 20px; padding-bottom: 80px;">
+    <div class="container">
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 24px;">
+        
+        <div class="rs-card glow-card" style="padding: 28px;">
+          <div style="font-size: 2.2rem; color: var(--rs-gold); margin-bottom: 12px;"><i class="fa-solid fa-city"></i></div>
+          <h3 style="font-size: 1.3rem; color: #fff; margin-bottom: 8px;">Modern Urban Roleplay</h3>
+          <p style="color: var(--text-secondary); font-size: 0.9rem; line-height: 1.6;">Engage in rich city roleplay with dedicated factions, jobs, vehicles, and player-driven storylines.</p>
+        </div>
+
+        <div class="rs-card glow-card" style="padding: 28px;">
+          <div style="font-size: 2.2rem; color: var(--rs-cyan); margin-bottom: 12px;"><i class="fa-solid fa-gun"></i></div>
+          <h3 style="font-size: 1.3rem; color: #fff; margin-bottom: 8px;">High-Stakes Action</h3>
+          <p style="color: var(--text-secondary); font-size: 0.9rem; line-height: 1.6;">Smooth combat mechanics, law enforcement systems, and intense tactical engagements.</p>
+        </div>
+
+        <div class="rs-card glow-card" style="padding: 28px;">
+          <div style="font-size: 2.2rem; color: var(--rs-gold); margin-bottom: 12px;"><i class="fa-solid fa-users"></i></div>
+          <h3 style="font-size: 1.3rem; color: #fff; margin-bottom: 8px;">Kaiven Community</h3>
+          <p style="color: var(--text-secondary); font-size: 0.9rem; line-height: 1.6;">Participate in community polls, early playtests, and development updates on Discord.</p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- Universal Footer -->
+  <footer class="rs-footer">
+    <div class="container">
+
+      <div class="rs-footer-top">
+        <div class="rs-lang-selector">
+          <i class="fa-solid fa-globe"></i> <span>ENGLISH (US)</span>
+        </div>
+
+        <div class="rs-footer-socials">
+          <a href="https://discord.gg/ccWf2pxShW" target="_blank" title="Discord"><i class="fa-brands fa-discord"></i></a>
+          <a href="https://www.youtube.com/@kaivensoftware" target="_blank" title="YouTube"><i class="fa-brands fa-youtube"></i></a>
+          <a href="https://www.roblox.com/communities/674886308/Kaiven-Software" target="_blank" title="Roblox Group"><i class="fa-solid fa-cube"></i></a>
+          <a href="https://github.com/kaivensoftware" target="_blank" title="GitHub"><i class="fa-brands fa-github"></i></a>
+        </div>
+      </div>
+
+      <div class="rs-footer-links">
+        <a href="index.html#support">Contact</a>
+        <a href="https://www.roblox.com/communities/674886308/Kaiven-Software" target="_blank">Careers</a>
+        <a href="#">Privacy Policy</a>
+      </div>
+
+      <div class="rs-footer-bottom">
+        <div class="rs-footer-brand">
+          <img src="assets/images/logo.png" alt="Logo" class="rs-footer-emblem">
+          <span>KAIVEN SOFTWARE</span>
+        </div>
+        <p class="rs-copyright">Kaiven Software, Inc. © 2026. Omni Seas and Golden State are trademarks of Kaiven Software. All rights reserved.</p>
+      </div>
+
+    </div>
+  </footer>
+
+  <!-- Search Modal -->
+  <div class="rs-search-overlay" id="searchModal">
+    <div class="rs-search-container">
+      <button class="rs-search-close" id="closeSearchBtn"><i class="fa-solid fa-xmark"></i></button>
+      <div class="rs-search-box">
+        <i class="fa-solid fa-magnifying-glass rs-search-icon"></i>
+        <input type="text" id="searchInput" placeholder="SEARCH KAIVEN SOFTWARE & GAMES..." autofocus>
+      </div>
+      <div class="rs-search-results" id="searchResults">
+        <div class="rs-search-quick">
+          <span>QUICK LINKS:</span>
+          <a href="games.html">Games Catalog</a>
+          <a href="omni-seas.html">Omni Seas Page</a>
+          <a href="golden-state.html">Golden State Page</a>
+          <a href="https://discord.gg/ccWf2pxShW" target="_blank">Join Discord</a>
+          <a href="store.html">Store Page</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="app.js?v=2.0.5"></script>
+</body>
+</html>
