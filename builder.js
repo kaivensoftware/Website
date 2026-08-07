@@ -625,6 +625,35 @@ document.addEventListener('DOMContentLoaded', () => {
       applyEffectString(c.effect);
     });
 
+    // Weapon Base Damage & Categorized Output Calculation
+    const wObj = WEAPONS_DATA.find(w => w.name === selectedWeaponName) || { name: 'Shusui', damage: 25 };
+    const baseWpnDmg = wObj.damage;
+
+    // Determine Weapon Category (LHT, MED, HVY)
+    let wCategory = 'MED';
+    if (['Viltrumite Style', 'Taijutsu'].includes(wObj.name)) {
+      wCategory = 'LHT';
+    } else if (['Zanpakutō', 'Shikai', 'Letzt Stil', 'Shusui', 'Ame No Habakiri', 'Nidai Kitetsu', 'Shodaki Kitetsu', 'Wado Ichimonji'].includes(wObj.name)) {
+      wCategory = 'MED';
+    } else if (['Bankai', 'Vollständig'].includes(wObj.name)) {
+      wCategory = 'HVY';
+    }
+
+    // ONLY matching weapon mastery scales damage!
+    let matchingMasteryVal = 0;
+    if (wCategory === 'LHT') matchingMasteryVal = stats.light;
+    else if (wCategory === 'MED') matchingMasteryVal = stats.med;
+    else if (wCategory === 'HVY') matchingMasteryVal = stats.heavy;
+
+    const strDmgBonus = stats.str * 0.5;
+    const masteryDmgBonus = matchingMasteryVal * 0.5;
+
+    const isStyle = wCategory === 'LHT';
+    const primaryDmgBuff = isStyle ? (styleDmg + physDmg) : (wpnDmg + physDmg);
+    const totalDmgMultiplier = 1 + (primaryDmgBuff + totalDmg + strDmgBonus + masteryDmgBonus) / 100;
+
+    const scaledWeaponDamage = baseWpnDmg * totalDmgMultiplier;
+
     return {
       str: stats.str,
       agi: stats.agi,
@@ -653,7 +682,10 @@ document.addEventListener('DOMContentLoaded', () => {
       evasion: Math.min(10, evasion),
       ultDmg: Math.min(100, ultDmg),
       elemDmg: Math.min(300, elemDmg),
-      endurance: Math.min(50, endurance)
+      endurance: Math.min(50, endurance),
+      baseWpnDmg: baseWpnDmg,
+      wCategory: wCategory,
+      scaledWeaponDamage: scaledWeaponDamage
     };
   }
 
@@ -688,6 +720,13 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Calculate & Display 26 Game Stats with +VAL% | +CAP% format
     const gStats = calculateGameStats();
+
+    if (activeWeaponName) {
+      activeWeaponName.textContent = `${selectedWeaponName} (${gStats.wCategory})`;
+    }
+    if (finalWeaponDmgVal) {
+      finalWeaponDmgVal.textContent = `${gStats.scaledWeaponDamage.toFixed(1)} DMG`;
+    }
 
     const setStatTextWithCap = (id, val, capVal, prefix = '+') => {
       const el = document.getElementById(id);
