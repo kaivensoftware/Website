@@ -359,6 +359,21 @@ document.addEventListener('DOMContentLoaded', () => {
   {"name":"Dial-Engine Corsair","req":"60 AGI, 50 GUN, Skypiean Race, Pirate Faction","category":"Combo Exclusive","effect":"+12% Weapon Damage, +10% Movement Speed, -8% Cooldown Reduction"}
 ];
 
+    const WEAPONS_DATA = [
+  {"name": "Shusui", "damage": 25},
+  {"name": "Nidai Kitetsu", "damage": 27},
+  {"name": "Shodaki Kitetsu", "damage": 27},
+  {"name": "Ame No Habakiri", "damage": 30},
+  {"name": "Wado Ichimonji", "damage": 30},
+  {"name": "Viltrumite Style", "damage": 35},
+  {"name": "Taijutsu", "damage": 30},
+  {"name": "Zanpakutō", "damage": 25},
+  {"name": "Shikai", "damage": 30},
+  {"name": "Bankai", "damage": 35},
+  {"name": "Letzt Stil", "damage": 30},
+  {"name": "Vollständig", "damage": 35}
+];
+
   // DOM Elements
   const strSlider = document.getElementById('strSlider');
   const vitSlider = document.getElementById('vitSlider');
@@ -393,6 +408,10 @@ document.addEventListener('DOMContentLoaded', () => {
   // Race and Clan Selectors
   const raceSelect = document.getElementById('raceSelect');
   const clanSelect = document.getElementById('clanSelect');
+  const weaponSelect = document.getElementById('weaponSelect');
+  const activeWeaponName = document.getElementById('activeWeaponName');
+  const finalWeaponDmgVal = document.getElementById('finalWeaponDmgVal');
+  let selectedWeaponName = 'Shusui';
 
   let currentRace = 'Human';
   let currentClan = 'None';
@@ -400,6 +419,11 @@ document.addEventListener('DOMContentLoaded', () => {
   raceSelect?.addEventListener('change', (e) => {
     currentRace = e.target.value;
     if (raceBadge) raceBadge.textContent = currentRace.toUpperCase();
+    updateUI();
+  });
+
+  weaponSelect?.addEventListener('change', (e) => {
+    selectedWeaponName = e.target.value;
     updateUI();
   });
 
