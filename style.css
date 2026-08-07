@@ -1189,6 +1189,44 @@ body.kaiven-site {
   margin-bottom: 12px;
 }
 
+.builder-badges-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.builder-summary-badge {
+  position: static !important;
+  display: inline-flex !important;
+  align-items: center;
+  background: rgba(4, 7, 17, 0.9);
+  font-size: 0.7rem;
+  font-weight: 900;
+  padding: 5px 12px;
+  letter-spacing: 0.08em;
+  border-radius: 4px;
+  line-height: 1;
+}
+
+.badge-faction {
+  border: 1px solid var(--rs-gold);
+  color: var(--rs-gold);
+  box-shadow: 0 0 10px rgba(224, 169, 56, 0.2);
+}
+
+.badge-race {
+  border: 1px solid var(--rs-cyan);
+  color: var(--rs-cyan);
+  box-shadow: 0 0 10px rgba(0, 242, 254, 0.2);
+}
+
+.badge-clan {
+  border: 1px solid #a855f7;
+  color: #c084fc;
+  box-shadow: 0 0 10px rgba(168, 85, 247, 0.2);
+}
+
 .level-badge {
   font-size: 0.85rem;
   font-weight: 900;

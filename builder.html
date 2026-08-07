@@ -18,7 +18,7 @@
   <!-- FontAwesome Icons -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
-  <link rel="stylesheet" href="style.css?v=2.0.1">
+  <link rel="stylesheet" href="style.css?v=2.0.2">
 </head>
 <body class="kaiven-site">
 
@@ -313,11 +313,11 @@
 
           <!-- Character Overview & Game Stats Card -->
           <div class="rs-card builder-card glow-card" style="padding: 28px;">
-            <div class="builder-summary-header">
-              <div style="display: flex; gap: 8px; align-items: center; flex-wrap: wrap;">
-                <span class="rs-card-category" id="factionBadge">PIRATES</span>
-                <span class="rs-card-category" id="raceBadge" style="border-color: var(--rs-cyan); color: var(--rs-cyan);">HUMAN</span>
-                <span class="rs-card-category" id="clanBadge" style="border-color: var(--rs-gold); color: var(--rs-gold);">NONE</span>
+            <div class="builder-summary-header" style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px;">
+              <div class="builder-badges-wrapper">
+                <span class="builder-summary-badge badge-faction" id="factionBadge">PIRATES</span>
+                <span class="builder-summary-badge badge-race" id="raceBadge">HUMAN</span>
+                <span class="builder-summary-badge badge-clan" id="clanBadge">NONE</span>
               </div>
               <div class="level-badge">LEVEL <span id="charLevel" class="text-cyan">0</span> / 25</div>
             </div>
@@ -504,7 +504,7 @@
     </div>
   </div>
 
-  <script src="app.js?v=2.0.1"></script>
-  <script src="builder.js?v=2.0.1"></script>
+  <script src="app.js?v=2.0.2"></script>
+  <script src="builder.js?v=2.0.2"></script>
 </body>
 </html>
