@@ -387,7 +387,9 @@ body.kaiven-site {
 }
 
 .rs-hero-backdrop, .rs-hero-gradient {
-  display: none !important;
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
 }
 
 .rs-hero-container {
